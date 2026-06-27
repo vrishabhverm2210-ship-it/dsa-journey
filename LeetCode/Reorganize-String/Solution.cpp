@@ -45,10 +45,11 @@
 45                idx++;
 46                top2.first--;
 47                if(top2.first>0)pq.push({top2.first,top2.second});
-48                pq.push(top1);
+48              
 49             }
-50             
-51        }
-52      return res;  
-53    }
-54};
+50               pq.push(top1);
+51             
+52        }
+53      return res;  
+54    }
+55};
