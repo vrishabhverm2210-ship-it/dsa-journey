@@ -1,0 +1,50 @@
+1class Solution {
+2public:
+3    vector<vector<int>> filterOccupiedIntervals(vector<vector<int>>& occupiedIntervals, int freeStart, int freeEnd) {
+4         vector<vector<int>> res;
+5        // for safety sort it
+6        sort(occupiedIntervals.begin(),occupiedIntervals.end());
+7       vector<int> remove = {freeStart, freeEnd};
+8        // firstly merge (without overlapping)
+9        int start1=occupiedIntervals[0][0];
+10        int end1=occupiedIntervals[0][1];
+11        for(int i=1;i<occupiedIntervals.size();i++){
+12            int start2=occupiedIntervals[i][0];
+13            int end2=occupiedIntervals[i][1];
+14            // overlapping condition
+15            if(start2<=end1+1){
+16                start1=start1;
+17                end1=max(end1,end2);
+18                continue;
+19            }
+20            else{
+21                res.push_back({start1,end1});
+22                start1=start2;
+23                end1=end2;
+24            }
+25        }
+26        res.push_back({start1,end1});
+27        // now i have to apply remove vala logic
+28          vector<vector<int>>ans;
+29        for(int i=0;i<res.size();i++){
+30            int start1=res[i][0];
+31            int end1=res[i][1];
+32              // No overlap
+33            if (end1 < freeStart || start1 > freeEnd) {
+34                ans.push_back({start1, end1});
+35            }
+36            else{
+37               // Left part remains
+38                if (start1 < freeStart) {
+39                    ans.push_back({start1, freeStart - 1});
+40                }
+41
+42                // Right part remains
+43                if (end1 > freeEnd) {
+44                    ans.push_back({freeEnd + 1, end1});
+45                }
+46            }
+47        }
+48        return ans;
+49    }
+50};
