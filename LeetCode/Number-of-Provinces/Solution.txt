@@ -1,0 +1,24 @@
+1class Solution {
+2public:
+3void dfs(vector<vector<int>>& grid ,int node,vector<bool> &visited){   // Don't treat it as grid it is adjacencey matrix
+4    visited[node]=true;
+5    for(int j=0;j<grid.size();j++){
+6        if(grid[node][j]==1 && visited[j]==false){
+7            dfs(grid,j,visited);
+8        }
+9    }
+10}
+11    int findCircleNum(vector<vector<int>>& isConnected) {
+12        int res=0;
+13        int n=isConnected.size();
+14        vector<bool>vis(n,0);
+15      for(int i=0;i<n;i++){
+16      if( vis[i] ==false ){
+17        res++;
+18        dfs(isConnected,i,vis);
+19      }
+20
+21      }
+22return res;
+23    }
+24};
