@@ -1,0 +1,37 @@
+1class Solution {
+2public: 
+3int x[4]={-1,1,0,0};
+4int y[4]={0,0,-1,1};
+5bool isValid(int row,int col,int n,int m){
+6    if(row<0 ||row>=n || col<0 || col>=m)return false;
+7    return true;
+8}
+9void dfs(vector<vector<char>>& grid,int i,int j,int n,int m){
+10    grid[i][j]='2';
+11    // now for neighbours
+12    for(int k=0;k<4;k++){
+13        int row=i+x[k];
+14        int col=j+y[k];
+15    if(isValid(row,col,n,m) && grid[row][col]=='1'){
+16        dfs(grid,row,col,n,m);
+17    }
+18    }
+19    // return;
+20}
+21    int numIslands(vector<vector<char>>& grid) {
+22        int n=grid.size();
+23        int m=grid[0].size();
+24                int res=0;
+25        // let's not make visited vector instead do it -2
+26    for(int i=0;i<n;i++){
+27        for(int j=0;j<m;j++){
+28           if(grid[i][j]=='1'){
+29            dfs(grid ,i,j,n,m);
+30            res=res+1;
+31           }
+32        
+33        }
+34    }
+35    return res;
+36    }
+37};
