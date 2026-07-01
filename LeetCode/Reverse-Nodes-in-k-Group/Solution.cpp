@@ -9,41 +9,51 @@
 9 * };
 10 */
 11class Solution {
-12public: 
-13ListNode* kreverse(ListNode* head, int k){
-14    // base case
-15    if(head==NULL){
-16        return NULL;
-17    }
-18    int count=0;
-19      ListNode* temp= head;
-20      while(temp!=NULL){
-21        count++;
-22        temp=temp->next;
-23      }
-24      if(count<k){
-25        return head;
-26      }
-27
-28    ListNode* curr=head;
-29    ListNode* prev=NULL;
-30    ListNode* next=NULL;
-31    int revcount=0;
-32    while(curr!= NULL&& revcount<k){
-33   next=curr->next;
-34   curr->next=prev;
-35   prev=curr;
-36   curr=next;
-37   revcount++;
-38    }
-39    if(next!=NULL){
-40        head->next= kreverse(next,k);
-41
-42    }
-43  return prev;
-44}
-45
-46    ListNode* reverseKGroup(ListNode* head, int k) {
-47         return kreverse(head,k);
-48    }
-49};
+12public:
+13void reverse(ListNode*  head,int times){
+14    ListNode* curr=head;
+15    ListNode* prev=NULL;
+16    while(times--){
+17        ListNode* next=curr->next;
+18        curr->next=prev;
+19        prev=curr;
+20        curr=next;
+21    }
+22
+23}
+24    ListNode* reverseKGroup(ListNode* head, int k) {
+25        if(head==NULL)return NULL;
+26        ListNode* left=head;
+27        ListNode* right=NULL;
+28        ListNode* prevleft=NULL;
+29        ListNode* res=NULL;
+30        while(true){
+31            right=left;
+32            for(int i=0;i<k-1;i++){
+33                if(right==NULL)break;
+34            
+35            right=right->next;
+36            }
+37        // Once we able to find right then normal logic
+38        if(right){
+39            ListNode* nextleft=right->next;
+40            reverse(left,k);
+41            if(prevleft){
+42                prevleft->next=right;
+43            }
+44            prevleft=left;
+45            if(res==NULL)res=right; // storing first right for returning the answer
+46
+47            left=nextleft;
+48        }
+49        else{  // right nhi find kr paye
+50        if(prevleft){
+51            prevleft->next=left;
+52        }
+53        if(res==NULL)res=left;
+54        break;
+55  }
+56       }
+57        return res;
+58    }
+59};
