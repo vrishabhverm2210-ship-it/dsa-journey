@@ -1,0 +1,39 @@
+1/**
+2 * Definition for singly-linked list.
+3 * struct ListNode {
+4 *     int val;
+5 *     ListNode *next;
+6 *     ListNode() : val(0), next(nullptr) {}
+7 *     ListNode(int x) : val(x), next(nullptr) {}
+8 *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+9 * };
+10 */
+11class Solution {
+12public:
+13   ListNode* rotateRight(ListNode* head, int k) {
+14        // count the toatal no of nodes and the last node first
+15        if(head==NULL)return NULL;
+16        ListNode* last=head;
+17        int count=1;
+18        while(last->next!=NULL){
+19            last=last->next;
+20            count++;
+21        }
+22        // now according to no of rotation nikal lo
+23        k=k%count;
+24        if(k==0)return head;  // no need to rotate
+25        // now find (n-k)th node
+26        ListNode* node=head;
+27        int times=count-k-1;
+28
+29        while(times--){
+30          if(node->next==NULL)return node;
+31          node=node->next;
+32        }
+33        // now do you connecting step
+34        last->next=head;
+35        ListNode* res=node->next;
+36        node->next=NULL;
+37        return res;
+38    }
+39};
