@@ -1,24 +1,17 @@
 1class Solution {
 2public:
 3    int maxProduct(vector<int>& nums) {
-4        
-5        int maxi = nums[0];
-6        int mini = nums[0];
-7        int ans  = nums[0];
-8
-9        for(int i = 1; i < nums.size(); i++) {
-10
-11            // If negative number → swap
-12            if(nums[i] < 0)
-13                swap(maxi, mini);
-14
-15            maxi = max(nums[i], maxi * nums[i]);
-16            mini = min(nums[i], mini * nums[i]);
-17
-18            ans = max(ans, maxi);
-19        }
-20
-21        return ans;
-22    }
-23};
-24
+4        int bestmaxi=nums[0];
+5        int bestmini=nums[0];
+6        int res=nums[0];
+7        for(int i=1;i<nums.size();i++){
+8            int c1=nums[i];
+9            int c2=nums[i]*bestmaxi;
+10            int c3=nums[i]*bestmini;
+11            bestmaxi=max({c1,c2,c3});
+12            bestmini=min({c1,c2,c3});
+13            res=max({res,bestmaxi,bestmini});
+14        }
+15        return res;
+16    }
+17};
