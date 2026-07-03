@@ -1,46 +1,35 @@
 1class Solution {
 2public:
-3bool allmatched(vector<int>&having,vector<int>&find){
-4   for(int i=0;i<256;i++){
-5    if(having[i]>find[i])return false;
-6   }
-7   return true;
+3bool found(vector<int>&need ,vector<int> & have ){
+4    for(int i=0;i<256;i++){
+5        if(have[i]<need[i])return false;
+6    }
+7    return true;
 8}
 9    string minWindow(string s, string t) {
-10        int n=s.size();
-11        int m=t.size();
-12        // vectors for storing
-13        vector<int>having(256,0);  // for t 
-14        vector<int>find(256,0);  // for s
-15        // store elements of t into the [having]
-16        for(int i=0;i<t.size();i++){
-17           having[t[i]]++;
-18        }
-19        // let's apply minimum window template in string s
-20        int high=0;
-21        int low=0;
-22        int count=INT_MAX;
-23          int start;
-24        for(high=0;high<n;high++){
-25            find[s[high]]++;
-26          int len;
-27        
-28            // right case which we have to pick
-29            while(allmatched(having,find)){
-30                len=high-low+1;
-31             if(len<count){   //MINI case
-32             count=len;
-33             start=low;
-34             }
-35                find[s[low]]--;
-36                low++;
-37            } 
-38             
-39        }
-40
-41        if(count == INT_MAX)   // this must be done otherwise it is throwing tle
-42    return "";
-43return s.substr(start,count);
-44
-45    }
-46};
+10        int high=0;
+11        int low=0;
+12        vector<int>need(256,0);
+13        for(int i=0;i<t.size();i++){
+14            need[t[i]]++;
+15        }
+16        vector<int>have(256,0);
+17        int count=INT_MAX;
+18        int startindex;
+19        for(high=0;high<s.size();high++){
+20            have[s[high]]++;
+21            // right block means , if we found everthing
+22            while(found(need,have)){
+23                int len=high-low+1;
+24                if(count>len){      /// important step
+25                    count=len;
+26                    startindex=low;
+27                }
+28                have[s[low]]--;
+29                    low++;
+30            }
+31        }
+32        if(count==INT_MAX)return "";
+33     return s.substr(startindex,count);
+34    }
+35};
