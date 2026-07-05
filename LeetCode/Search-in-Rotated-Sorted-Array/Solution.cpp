@@ -1,45 +1,66 @@
 1class Solution {
 2public:
-3    int search(vector<int>& nums, int target) {
-4        int n=nums.size();
-5        int low=0;
-6        int high=n-1;
-7        while(low<=high){
-8            int mid=low+(high-low)/2;
-9            // part deciding whether in 1st part or in second
-10            if(nums[n-1]<nums[mid]){   // means target first part mai milega
-11              if(target==nums[mid]){
-12                return mid;
-13              }
-14              else if(target>nums[mid]){
-15                 low=mid+1;   // done
-16              }
-17              else{   // confusion
-18              if(target>nums[n-1]){ // means target hmara first part mai hi lie krta hai
-19                 high=mid-1;
-20              }
-21              else{
-22                low=mid+1;  // means second part mai dekhna pdega
-23              }
-24              }
-25            }
-26            else{ // 2nd part mai milega
-27               if(target==nums[mid]){
-28                return mid;
-29              }
-30              else if(target<nums[mid]){
-31                 high=mid-1;
-32              }
-33              else{   // again confusing part
-34              if(target>nums[n-1]){
-35                high=mid-1;
-36              }
-37              else{
-38                low=mid+1;
-39              }       
-40              }
-41            }
-42        }
-43        return -1;
-44    }
-45};
+3    int findpivot(const vector<int>& nums, int n) {
+4        int s = 0;
+5        int e = n - 1;
+6        // If array is already sorted (no rotation)
+7        if (nums[s] <= nums[e]) {
+8            return 0;
+9        }
+10        while (s < e) {
+11            int mid = s + (e - s) / 2;
+12            if (nums[mid] > nums[e]) {
+13                // pivot is to right of mid
+14                s = mid + 1;
+15            } else {
+16                // pivot is at mid or to left of mid
+17                e = mid;
+18            }
+19        }
+20        return s;
+21    }
+22
+23    int binarySearch(const vector<int>& nums, int start, int end, int target) {
+24        int s = start;
+25        int e = end;
+26        while (s <= e) {
+27            int mid = s + (e - s) / 2;
+28            if (nums[mid] == target) {
+29                return mid;
+30            } else if (nums[mid] > target) {
+31                e = mid - 1;
+32            } else {
+33                s = mid + 1;
+34            }
+35        }
+36        return -1;
+37    }
+38
+39    int search(vector<int>& nums, int target) {
+40        int n = nums.size();
+41        if (n == 0) return -1;
+42
+43        int pivot = findpivot(nums, n);
+44
+45        // if pivot element is the target
+46        if (nums[pivot] == target) {
+47            return pivot;
+48        }
+49
+50       if (pivot == 0) {
+51    return binarySearch(nums, 0, n - 1, target);
+52}
+53
+54if (target >= nums[0]) {
+55    // target in left sorted part
+56    return binarySearch(nums, 0, pivot - 1, target);
+57} else {
+58    // target in right sorted part
+59    return binarySearch(nums, pivot, n - 1, target);
+60}
+61
+62}
+63    
+64};
+65
+66
