@@ -1,0 +1,32 @@
+1class Solution {
+2public:
+3    int fun1(int n){
+4        int maxi=INT_MIN;
+5        int mini=INT_MAX;
+6        while(n>0){
+7        int digit=n%10;
+8            maxi=max(maxi,digit);
+9            mini=min(mini,digit);
+10            n=n/10;
+11        }
+12        return maxi-mini;
+13    }
+14    int maxDigitRange(vector<int>& nums) {
+15        // firstly find the digit range
+16        int n=nums.size();
+17        int maxi=INT_MIN;
+18        for(int i=0;i<n;i++){
+19            int range=fun1(nums[i]);
+20            maxi=max(maxi,range);
+21        }
+22        // for finding the sum
+23        int sum=0;
+24        for(int i=0;i<n;i++){
+25        int range=fun1(nums[i]);
+26            if(range==maxi){
+27                sum+=nums[i];
+28            }
+29        }
+30        return sum;
+31    }
+32};
