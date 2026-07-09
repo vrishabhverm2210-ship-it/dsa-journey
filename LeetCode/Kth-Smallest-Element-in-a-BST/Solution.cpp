@@ -11,20 +11,31 @@
 11 */
 12class Solution {
 13public:
-14int solve(TreeNode* root, int k ,int& i){
-15    if(root==NULL){return -1;}
-16    // left 
-17    int left=solve(root->left,k,i);
-18    if(left!=-1){
-19        return left;
-20    }
-21    i++;
-22    if(i==k){return root->val;}
-23     // right
-24     return solve(root->right,k,i);
-25}
-26    int kthSmallest(TreeNode* root, int k) {
-27        int i=0;
-28        int ans=solve(root,k,i);
-29     return ans;}
-30};
+14TreeNode* getsmall(stack<TreeNode*>& asc) {
+15    TreeNode* small = asc.top();
+16    asc.pop();
+17
+18    TreeNode* curr = small->right;
+19
+20    while (curr) {
+21        asc.push(curr);
+22        curr = curr->left;
+23    }
+24
+25    return small;
+26}
+27    int kthSmallest(TreeNode* root, int k) {
+28        int ans;
+29        stack<TreeNode*>asc;
+30        TreeNode*t=root;
+31        while(t){
+32            asc.push(t);
+33            t=t->left;
+34        }
+35        while(k--){
+36          TreeNode* node=getsmall(asc);
+37          ans=node->val;   
+38        }
+39         return ans;
+40    }
+41};
