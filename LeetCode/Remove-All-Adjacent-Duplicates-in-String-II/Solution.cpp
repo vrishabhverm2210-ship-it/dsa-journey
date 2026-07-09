@@ -20,7 +20,7 @@
 20                continue;
 21            }
 22            else{
-23                st.pop();
+23                st.pop();   // puri ki puri entry hi udegi
 24            }
 25        }
 26        while(!st.empty()){
