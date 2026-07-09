@@ -8,33 +8,26 @@
 8 * };
 9 */
 10class Solution {
-11public: 
-12TreeNode*  solve(TreeNode* root, TreeNode* p, TreeNode* q){
-13    // base case
-14    if(root==NULL){
-15        return NULL;
-16    }
-17    if(root==p || root==q){   // p and q are pointers (we can only compare them with 
-18        return root;
-19    }
-20    TreeNode* leftans=solve(root->left,p,q);
-21     TreeNode* rightans=solve(root->right,p,q);
-22     // make 4 cases
-23     if(leftans!=NULL && rightans!=NULL){
-24        return root;
-25     }
-26     else if(leftans!=NULL &&rightans==NULL){
-27        return leftans;
-28     }
-29      else if(leftans==NULL &&rightans!=NULL){
-30        return rightans;
-31     }
-32     else{
-33        return NULL;
-34     }
-35    
-36}
-37    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-38       return solve(root,p,q); 
-39    }
-40};
+11public:
+12int fun1(TreeNode* root, TreeNode* p, TreeNode* q ,  TreeNode* & ans){
+13    // Base condtion
+14    if(root==NULL)return 0;
+15    // three conditions
+16     int r1= fun1(root->left,p,q,ans);
+17     int r2=fun1(root->right,p,q,ans);
+18    int score=0;
+19    if((root->val== p->val) || (root->val == q->val)){
+20        score=1;
+21    }
+22    int total=score+r1+r2;
+23    if(total==2 && ans ==NULL){
+24        ans=root;
+25    }
+26    return total;
+27}
+28    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+29        TreeNode* ans=NULL;
+30        fun1(root,p,q,ans);
+31        return ans;
+32    }
+33};
