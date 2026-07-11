@@ -12,14 +12,17 @@
 12class Solution {
 13public:
 14void fun1(TreeNode* root){
-15    if(root==NULL )return ;
-16    swap(root->left, root->right);
+15    if (root==NULL)return ;
+16    swap(root->left,root->right);
 17    fun1(root->left);
 18    fun1(root->right);
 19}
 20    TreeNode* invertTree(TreeNode* root) {
-21        // if(root==NULL)return NULL;
-22        fun1(root);
-23        return root;
-24    }
-25};
+21        fun1(root);
+22        return root;
+23        // swap(root->left,root->right);
+24        // invertTree(root->left);
+25        // invertTree(root->right);
+26        // return root;
+27    }
+28};
