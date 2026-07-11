@@ -11,17 +11,18 @@
 11 */
 12class Solution {
 13public:
-14bool fun1(TreeNode* p , TreeNode* q){
-15    if(p == NULL && q ==NULL)return true;
-16    if(p ==NULL || q==NULL)return false;
-17    if(p->val != q->val)return false;
-18    // now make recursive call as we are treating one tree as two tree on basis of its left and right chlid
-19    bool r1=fun1(p->left, q->right);  // mirror condition
-20    bool r2=fun1(p->right,q->left);
-21    if(r1==true && r2== true)return true;
+14bool fun1(TreeNode* root1,TreeNode* root2){
+15    // THREE CONDITIONS IS WHAT REQUIRED TO COMPARE THE symmetrically OF THIS TRREE
+16    if(root1==NULL && root2==NULL)return true;
+17    if(root1 ==NULL || root2==NULL)return false;
+18    if(root1->val != root2->val ) return false;
+19     int r1= fun1(root1->left,root2->right);
+20    int r2= fun1(root1->right,root2->left);
+21    if(r1 ==true && r2==true)return true;
 22    return false;
-23}
-24    bool isSymmetric(TreeNode* root) {
-25        return fun1(root->left,root->right);
-26    }
-27};
+23    
+24}
+25    bool isSymmetric(TreeNode* root) {
+26        return fun1(root->left,root->right);
+27    }
+28};
