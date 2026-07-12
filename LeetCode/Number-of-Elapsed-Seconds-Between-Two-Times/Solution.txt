@@ -1,0 +1,17 @@
+1class Solution {
+2public:
+3    int toSeconds(string time) {
+4        int hours = (time[0] - '0') * 10 + (time[1] - '0');
+5        int minutes = (time[3] - '0') * 10 + (time[4] - '0');
+6        int seconds = (time[6] - '0') * 10 + (time[7] - '0');
+7
+8        return hours * 3600 + minutes * 60 + seconds;
+9    }
+10
+11    int secondsBetweenTimes(string startTime, string endTime) {
+12        int start = toSeconds(startTime);
+13        int end = toSeconds(endTime);
+14
+15        return end - start;
+16    }
+17};
