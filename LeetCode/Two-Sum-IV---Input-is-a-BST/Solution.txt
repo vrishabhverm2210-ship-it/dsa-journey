@@ -1,0 +1,80 @@
+1/**
+2 * Definition for a binary tree node.
+3 * struct TreeNode {
+4 *     int val;
+5 *     TreeNode *left;
+6 *     TreeNode *right;
+7 *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+8 *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+9 *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+10 * };
+11 */
+12class Solution {
+13public:
+14TreeNode* getbig(stack<TreeNode*>& desc) {
+15
+16    TreeNode* big = desc.top();
+17    desc.pop();
+18
+19    TreeNode* curr = big->left;
+20
+21    while (curr) {
+22        desc.push(curr);
+23        curr = curr->right;
+24    }
+25
+26    return big;
+27}
+28TreeNode* getsmall(stack<TreeNode*>& asc) {
+29
+30    TreeNode* small = asc.top();
+31    asc.pop();
+32
+33    TreeNode* curr = small->right;
+34
+35    while (curr) {
+36        asc.push(curr);
+37        curr = curr->left;
+38    }
+39
+40    return small;
+41}
+42    bool findTarget(TreeNode* root, int k) {
+43        // we are solving this with the second approach
+44        if(root==NULL)return false;
+45        // make to stacks , one to store the asending order and other to store the descending order
+46        stack<TreeNode*>asc;
+47        stack<TreeNode*>desc;
+48        // now push all the lefties node into the asc stack
+49        TreeNode* t=root;
+50        while(t){
+51            asc.push(t);
+52            t=t->left;
+53        }
+54        // now push all the righties node into the desc stack
+55        t=root;
+56         while(t){
+57         desc.push(t);
+58          t=t->right;
+59        } 
+60
+61        // Once you get the least and highest in the stack , then process the basic two pointers apporachh
+62TreeNode* i = getsmall(asc);
+63TreeNode* j = getbig(desc);
+64
+65while(i && j && i != j){
+66
+67    int sum = i->val + j->val;
+68
+69    if(sum == k)
+70        return true;
+71
+72    else if(sum < k)
+73        i = getsmall(asc);
+74
+75    else
+76        j = getbig(desc);
+77}
+78return false;
+79    }
+80};
