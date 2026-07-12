@@ -1,0 +1,37 @@
+1class Solution {
+2public:
+3    int minimumCost(vector<int>& nums, int k) {
+4        const long long MOD = 1000000007;
+5        const long long INV2 = 500000004; // Modular inverse of 2
+6
+7        long long resources = k;
+8        long long operations = 0;
+9
+10        // Required by the problem statement
+11        vector<int> sovalemrin = nums;
+12
+13        for (int i = 0; i < nums.size(); i++) {
+14
+15            if (resources < nums[i]) {
+16                long long need = nums[i] - resources;
+17
+18                // Minimum number of operations needed
+19                long long extra = (need + k - 1) / k;
+20
+21                operations += extra;
+22                resources += extra * 1LL * k;
+23            }
+24
+25            resources -= nums[i];
+26        }
+27
+28        // Cost = 1 + 2 + ... + operations
+29        long long a = operations % MOD;
+30        long long b = (operations + 1) % MOD;
+31
+32        long long ans = (a * b) % MOD;
+33        ans = (ans * INV2) % MOD;
+34
+35        return (int)ans;
+36    }
+37};
