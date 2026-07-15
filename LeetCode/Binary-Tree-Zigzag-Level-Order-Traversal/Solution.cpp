@@ -10,22 +10,22 @@
 10 * };
 11 */
 12class Solution {
-13public:
-14    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-15        if(root==NULL)return {};
-16        bool lefttoright=1; 
-17        queue<TreeNode*>q;
-18        q.push(root);
-19        vector<vector<int>>res;
-20        while(!q.empty()){
-21            int size=q.size();
-22            vector<int>temp(size);
-23            int start=0;
-24            int end=size-1;
-25            while(size--){
-26                TreeNode* node=q.front();
-27                q.pop();
-28                // check the left to right condition
+13public: 
+14bool lefttoright=1;
+15    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+16        if (root == NULL)
+17    return {};
+18        vector<vector<int>> res;
+19        queue<TreeNode*>q;
+20        q.push(root);
+21        while(!q.empty()){
+22            int size=q.size();
+23            vector<int>temp(size);
+24            int start=0;
+25            int end=size-1;
+26            while(size--){
+27                TreeNode* node=q.front();
+28                q.pop();
 29                if(lefttoright==1){
 30                    temp[start]=node->val;
 31                    start++;
@@ -34,14 +34,12 @@
 34                    temp[end]=node->val;
 35                    end--;
 36                }
-37                // insert their childrens
-38                if(node->left !=NULL)q.push(node->left);
-39                if(node->right !=NULL)q.push(node->right);
-40            }
-41            lefttoright=1-lefttoright;
-42            res.push_back(temp);
-43
-44        }
-45        return res;
-46    }
-47};
+37                if(node->left!=NULL)q.push(node->left);
+38                if(node->right !=NULL)q.push(node->right);
+39            }
+40            lefttoright=1-lefttoright;
+41            res.push_back(temp);
+42        }
+43        return res;
+44    }
+45};
