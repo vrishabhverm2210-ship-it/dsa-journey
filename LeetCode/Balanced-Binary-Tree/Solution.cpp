@@ -10,17 +10,19 @@
 10 * };
 11 */
 12class Solution {
-13public:   
-14bool isbalanced=true;
+13public:
+14bool isbalance=true;
 15int fun1(TreeNode* root){
 16    if(root==NULL)return 0;
 17    int r1=fun1(root->left);
 18    int r2=fun1(root->right);
-19    if(abs(r1-r2)>1)isbalanced=false;
-20    return 1+max(r1,r2);
-21}
-22    bool isBalanced(TreeNode* root) {
-23        fun1(root);
-24        return isbalanced;
-25    }
-26};
+19   if(abs(r1-r2)>1){
+20    isbalance=false;
+21   }
+22   return 1+max(r1,r2);
+23}
+24    bool isBalanced(TreeNode* root) {
+25        fun1(root);
+26        return isbalance;
+27    }
+28};
