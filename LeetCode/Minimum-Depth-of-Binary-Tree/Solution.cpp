@@ -14,7 +14,7 @@
 14int fun1(TreeNode* root){
 15    // base case
 16    if(root==NULL)return  0;
-17     if(root->left==NULL && root->right==NULL)return 1;
+17    //  if(root->left==NULL && root->right==NULL)return 1;
 18    // now for min case specially 
 19    if(root->left==NULL){
 20        return  1+fun1(root->right);
