@@ -12,16 +12,22 @@
 12class Solution {
 13public:
 14int fun1(TreeNode* root){
-15    if(root==NULL)return 0;
-16    if(root->left==NULL && root->right==NULL)return 1;
-17    if(root->left==NULL)return 1+fun1(root->right);
-18    if(root->right==NULL)return 1+fun1(root->left);
-19    // now normalfun
-20    int r1=fun1(root->left);
-21    int r2=fun1(root->right);
-22    return 1+min(r1,r2);
-23}
-24    int minDepth(TreeNode* root) {
-25        return fun1(root);
-26    }
-27};
+15    // base case
+16    if(root==NULL)return  0;
+17     if(root->left==NULL && root->right==NULL)return 1;
+18    // now for min case specially 
+19    if(root->left==NULL){
+20        return  1+fun1(root->right);
+21    }
+22    if(root->right==NULL){
+23        return 1+fun1(root->left);
+24    }
+25    // if normal case
+26    int r1=fun1(root->left);
+27    int r2=fun1(root->right);
+28    return 1+min(r1,r2);
+29}
+30    int minDepth(TreeNode* root) {
+31        return fun1(root);
+32    }
+33};
