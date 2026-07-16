@@ -29,5 +29,15 @@
 29            dp[i]=dp[i+1]+dp[i+2];
 30        }
 31    return dp[0];
-32    }
-33};
+32
+33    // let's try to make it space optimised
+34    int next=1;
+35    int next_next=1;
+36    for(int i=n-2;i>=0;i--){
+37        int ans=next+next_next;
+38        next_next=next;
+39        next =ans;
+40    }
+41    return next;
+42    }
+43};
