@@ -1,0 +1,29 @@
+1class Solution {
+2public:
+3int fun1(vector<int>& nums,int sum,int idx){
+4    int n=nums.size();
+5    if(idx==n){
+6        if(sum==0){
+7            return 1;
+8       
+9        }
+10          return 0;
+11    }
+12    if(nums[idx]>sum)return fun1(nums,sum,idx+1);
+13    int r1=fun1(nums,sum,idx+1);
+14    int r2=fun1(nums,sum-nums[idx],idx+1);
+15    return r1+r2;
+16}
+17    int findTargetSumWays(vector<int>& nums, int target) {
+18        // base condtion
+19        int n=nums.size();
+20        int sum=0;
+21        for(int i=0;i<nums.size();i++){
+22            sum+=nums[i];
+23        }
+24        int calculativesum=(target+sum)/2;
+25        if((sum+target)%2 !=0)return 0;
+26        if(sum <target)return 0;
+27        return fun1(nums,calculativesum,0);
+28    }
+29};
