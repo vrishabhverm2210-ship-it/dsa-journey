@@ -1,0 +1,33 @@
+1class Solution {
+2public:
+3int fun1(vector<int>&nums,vector<vector<int>> &dp ,int idx ,int free){
+4    // base condtion
+5    if(idx==nums.size()){
+6        return 0;
+7    }
+8    // we have to check whether this idx and free combination already present in vector or not
+9    if(dp[idx][free] !=-1){
+10        return dp[idx][free];
+11    }
+12    // otherwise we have three choices
+13    // 1 choice if free ==0
+14    if(free ==0){
+15        return dp[idx][free]=fun1(nums,dp,idx+1,1);
+16    }
+17    // 2 choices for the free==1 (we have to select maximum between taken and not taken case)
+18    int c1=fun1(nums,dp,idx+1,1);
+19    int c2=nums[idx]+fun1(nums,dp,idx+1,0);
+20    return dp[idx][free]=max(c1,c2);
+21
+22}
+23    int rob(vector<int>& nums) {
+24        int n=nums.size();
+25        // vector for memoizaation
+26        vector<vector<int>>dp(n);
+27        for(int i=0;i<n;i++){
+28            vector<int>t(2,-1);
+29            dp[i]=t;
+30        }
+31        return fun1(nums,dp,0,1);
+32    }
+33};
