@@ -10,20 +10,47 @@
 10    return dp[idx][k]= max(c1,c2);
 11    }
 12    else{
-13        int d1=fun1(prices,n,idx+1,k+1,dp)+prices[idx];
+13        int d1=fun1(prices,n,idx+1,k+1,dp)+prices[idx];    // dubara 2 bana diya because unlimited transaction is allowed
 14          int d2=fun1(prices,n,idx+1,k,dp);
 15          return  dp[idx][k]=max(d1,d2);
 16    }
 17    
 18}
 19    int maxProfit(vector<int>& prices) {
-20                int n=prices.size();
-21        int k=2;
-22        vector<vector<int>>dp(n+1);
-23        for(int i=0;i<=n;i++){
-24            vector<int>t(k+1,-1);
-25            dp[i]=t;
-26        }
-27      return fun1(prices,n,0,2,dp);
-28    }
-29};
+20    //             int n=prices.size();
+21    //     int k=2;
+22    //     vector<vector<int>>dp(n+1);
+23    //     for(int i=0;i<=n;i++){
+24    //         vector<int>t(k+1,-1);
+25    //         dp[i]=t;
+26    //     }
+27    //   return fun1(prices,n,0,2,dp);
+28              int n=prices.size();
+29           int k=2;
+30        vector<vector<int>>dp(n+1);
+31        for(int i=0;i<=n;i++){
+32            vector<int>t(k+1,-1);
+33            dp[i]=t;
+34        }
+35        // fill the 0th column
+36        for(int i=0;i<=n;i++){
+37            dp[i][0]=0;
+38        }
+39        // fill the nth row
+40        for(int i=0;i<=2;i++){
+41            dp[n][i]=0;
+42        }
+43        // now run a normal loop
+44        for(int i=n-1;i>=0;i--){
+45            for(int j=1;j<=k;j++){
+46                if(j==2){
+47                dp[i][j]=max(dp[i+1][j-1]-prices[i],dp[i+1][j]);
+48                }
+49                else{
+50                    dp[i][j]=max(dp[i+1][j+1]+prices[i],dp[i+1][j]);
+51                }     
+52            }
+53        }
+54return dp[0][k];
+55    }
+56};
