@@ -7,7 +7,7 @@
 7     int count=0;
 8    while(row>=0 && col<n){
 9        if(matrix[row][col]<=mid){
-10            count+=row+1;  
+10            count+=row+1;    // means upr ke saare add hojayenge because  obviously they are smaller
 11            col++;
 12        }
 13        else{
