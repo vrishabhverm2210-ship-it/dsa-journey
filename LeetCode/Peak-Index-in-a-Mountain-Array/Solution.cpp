@@ -1,24 +1,21 @@
 1class Solution {
 2public:
 3    int peakIndexInMountainArray(vector<int>& arr) {
-4        int n=arr.size();
-5        int start=0;
-6        int end=arr.size()-1;
-7        int res=-1;
-8        while(start<=end){
-9            int mid=start+(end-start)/2;
-10            // if(arr[mid]>arr[mid+1]){
-11            //     high=mid;
-12            // }
-13             if(arr[mid]<arr[mid+1]){
-14                start=mid+1;
-15            }
-16            else{
-17
-18                res=mid;
-19                end=mid-1;
-20            }
-21        }
-22        return res;
-23    }
-24};
+4        int low=0;
+5        int high=arr.size()-1;
+6        int res=-1;
+7        while(low<=high){
+8            int mid=low+(high-low)/2;
+9            if(arr[mid]<arr[mid+1]){
+10                // we are in the first  half so increase the low
+11                low=mid+1;
+12            }
+13            else{
+14                // we are in the second half try minimising
+15                res=mid;
+16                high=mid-1;
+17            }
+18        }
+19        return res;
+20    }
+21};
