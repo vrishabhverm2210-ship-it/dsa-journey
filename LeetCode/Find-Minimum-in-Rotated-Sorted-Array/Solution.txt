@@ -1,0 +1,23 @@
+1class Solution {
+2public:
+3    int findMin(vector<int>& nums) {
+4        int n=nums.size();
+5        int low=0;
+6        int res=-1;
+7        int high=n-1;
+8        while(high>=low){
+9            int mid=low+(high-low)/2;
+10            // determine first whether our mid element in first half or in second half
+11            if(nums[mid]>nums[n-1]){
+12                // first half (always move the index forward)
+13                low=mid+1;
+14            }
+15            else{
+16                // second and minimum must lie here so store this 
+17                res=nums[mid];
+18                high=mid-1;
+19            }
+20        }
+21        return res;
+22    }
+23};
