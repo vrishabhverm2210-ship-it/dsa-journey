@@ -1,38 +1,40 @@
 1class Solution {
 2public:
-3int maxi(vector<int>& piles ){
-4    int maxi1=INT_MIN;
+3bool ispossible(vector<int>& piles, int h,int mid){
+4    long long count=0;
 5    for(int i=0;i<piles.size();i++){
-6        maxi1=max(piles[i],maxi1);
-7    }
-8    return maxi1;
-9}
-10    int minEatingSpeed(vector<int>& piles, int h) {
-11        int low=1;
-12        int high=maxi(piles);
-13         int res=-1;
-14         while(low<=high){
-15            int mid=low+(high-low)/2;
-16            // find the speed
-17            long long speed=0;
-18            for(int i=0;i<piles.size();i++){
-19                if(piles[i]%mid ==0){
-20                    speed+=piles[i]/mid;
-21                }
-22                else{
-23                    speed+=piles[i]/mid;
-24                    speed++;
-25                }
-26            }
-27            if(speed<=h){
-28                res=mid;
-29                high=mid-1;
-30            }
-31            else{
-32                low=mid+1;
+6        if(piles[i]%mid==0){
+7        count+=piles[i]/mid;
+8        }
+9        else{
+10            count+=piles[i]/mid;
+11            count++;  
+12        }
+13    }
+14    if(count>h){
+15        return false;
+16    }
+17    return true;
+18}
+19    int minEatingSpeed(vector<int>& piles, int h) {
+20        int low=1;
+21        int res=-1;
+22        int maxi=INT_MIN;
+23         for(int i=0;i<piles.size();i++){
+24         maxi=max(maxi,piles[i]);
+25    }
+26        int high=maxi;
+27        while(low<=high){
+28            int mid=low+(high-low)/2;
+29            if(ispossible(piles,h,mid)){
+30                // store the answer and search for the more min
+31                res=mid;
+32                high=mid-1;
 33            }
-34
-35         }
-36         return res;
-37    }
-38};
+34            else{
+35                low=mid+1;
+36            }
+37        }
+38        return res;
+39    }
+40};
