@@ -10,11 +10,12 @@
 10         int len;
 11       if(height[i]<height[j])len=height[i];
 12       else len =height[j] ;
-13         int area=len*breadth;
-14         maxi=max(maxi,area);
-15         if(height[i]<height[j])i++;
-16         else j--;
-17        }
-18        return maxi;
-19    }
-20};
+13       
+14         int area=len*breadth;
+15         maxi=max(maxi,area);
+16         if(height[i]<height[j])i++;
+17         else j--;
+18        }
+19        return maxi;
+20    }
+21};
