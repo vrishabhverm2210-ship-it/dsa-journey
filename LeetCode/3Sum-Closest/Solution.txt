@@ -1,0 +1,34 @@
+1class Solution {
+2public:
+3    int threeSumClosest(vector<int>& nums, int target) {
+4        sort(nums.begin(),nums.end());
+5        int closest=INT_MAX;   // for differnce 
+6        int res_sum=0;
+7        
+8        
+9          for(int idx=0;idx<nums.size()-2;idx++){
+10            int i=idx+1;
+11            int j=nums.size()-1;
+12            while(i<j){
+13            int sum=nums[i]+nums[j]+nums[idx];
+14             if( abs(sum-target)<closest){
+15                closest=abs(sum-target);     
+16                res_sum=sum;
+17            }
+18            // if(sum==target){
+19            //     res_sum=target;
+20            //     return target;
+21            // }
+22            else if(sum>target){
+23                j--;
+24            }
+25            else{
+26                i++;
+27            }
+28           
+29    }
+30
+31        }
+32return res_sum;
+33    }
+34};
