@@ -1,0 +1,42 @@
+1class Solution {
+2public:
+3struct emp{
+4    bool operator()(pair<int,string>&a ,pair<int,string>&b){
+5        if(a.first != b.first){
+6           return  a.first>b.first;
+7        }
+8         return a.second<b.second;   // for lexical order
+9    }
+10};
+11
+12    vector<string> topKFrequent(vector<string>& words, int k) {
+13        unordered_map<string,int>mpp1;
+14        int n =words.size();
+15          for(int i=0;i<n;i++){
+16            mpp1[words[i]]++;
+17          }  
+18          // make min priority queue
+19          priority_queue<pair<int ,string>,vector<pair<int,string>>,emp> pq;
+20
+21          // now let's push the map's entry into queue with respect to the condition
+22          for(auto i:mpp1){
+23            string word=i.first;
+24            int freq=i.second;
+25            pair<int,string>curr={freq,word}; // this is how our entry will be stored in pq
+26            if(pq.size()<k){
+27                pq.push(curr);
+28                continue;
+29            }
+30            pq.push(curr);
+31            pq.pop();
+32          }
+33           vector<string> res;
+34           while(!pq.empty()){
+35             pair<int ,string>top=pq.top();
+36             pq.pop();
+37             res.push_back(top.second);
+38           }
+39           reverse(res.begin(),res.end());
+40           return res;
+41    }
+42};
