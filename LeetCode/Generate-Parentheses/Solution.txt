@@ -1,0 +1,28 @@
+1class Solution {
+2public:
+3void fun(int n,int open,int close,vector<string>&ans,string temp){
+4    // base case(when we have to return our answer)
+5    if(open == n && close == n){
+6        ans.push_back(temp);
+7        return;
+8    }
+9    // two conditon
+10    if(open<n){
+11        temp.push_back('(');
+12        fun(n,open+1,close,ans,temp);
+13        temp.pop_back();
+14    }
+15    if(close<open){
+16        temp.push_back(')');
+17        fun(n,open,close+1,ans,temp);
+18        temp.pop_back();
+19    }
+20    return;
+21}
+22    vector<string> generateParenthesis(int n) {
+23        vector<string>ans;
+24        string temp="";
+25        fun(n,0,0,ans,temp);
+26        return ans;
+27    }
+28};
