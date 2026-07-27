@@ -11,15 +11,42 @@
 11 */
 12class Solution {
 13public:
-14void fun1(TreeNode* root,vector<int>&res){
-15    if(root==NULL)return ;
-16    fun1(root->left,res);
-17     fun1(root->right,res);
-18     res.push_back(root->val);
-19}
-20    int countNodes(TreeNode* root) {
-21        vector<int>res;
-22        fun1(root,res);
-23        return res.size();
-24    }
-25};
+14int fun1(TreeNode* root){
+15    TreeNode* temp=root;
+16    int h=0;
+17    while(temp){
+18       h++;
+19       temp=temp->left;
+20           }
+21           return h;
+22}
+23int fun2(TreeNode* root){
+24    TreeNode* temp=root;
+25    int h=0;
+26    while(temp){
+27       h++;
+28       temp=temp->right;
+29           }
+30           return h;
+31}
+32int fun3(TreeNode* root){
+33    if(root==NULL)return 0;
+34    int left=fun3(root->left);
+35    int right=fun3(root->right);
+36    return 1+left+right;
+37}
+38    int countNodes(TreeNode* root) {
+39        if(root==NULL)return 0;
+40        // use complete binary tree property
+41        int lh=fun1(root);
+42        int rh=fun2(root);
+43       
+44
+45       // if lh == rh (means jo hmara tree hai vo complete hain puri tarah se toh hum O(1) mai nikal skte hain)
+46       if(lh==rh){
+47        return (1 << lh) -1;
+48       }
+49       // else normal method
+50       return fun3(root);
+51    }
+52};
