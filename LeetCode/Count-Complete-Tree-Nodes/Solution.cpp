@@ -29,12 +29,12 @@
 29           }
 30           return h;
 31}
-32int fun3(TreeNode* root){
-33    if(root==NULL)return 0;
-34    int left=fun3(root->left);
-35    int right=fun3(root->right);
-36    return 1+left+right;
-37}
+32// int fun3(TreeNode* root){
+33//     if(root==NULL)return 0;
+34//     int left=fun3(root->left);
+35//     int right=fun3(root->right);
+36//     return 1+left+right;
+37// }
 38    int countNodes(TreeNode* root) {
 39        if(root==NULL)return 0;
 40        // use complete binary tree property
@@ -47,6 +47,6 @@
 47        return (1 << lh) -1;
 48       }
 49       // else normal method
-50       return fun3(root);
+50       return 1+countNodes(root->left)+countNodes(root->right);
 51    }
 52};
