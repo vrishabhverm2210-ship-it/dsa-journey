@@ -11,19 +11,20 @@
 11 */
 12class Solution {
 13public:
-14int fun1(TreeNode* root, int &res){
+14int fun1(TreeNode* root,int &res){
 15    if(root==NULL)return 0;
-16   int r1=  fun1(root->left,res);
-17   int r2= fun1(root->right,res);
-18   // this for updating the diameter
-19   int total=r1+r2;  // this part iss calculatinig the total dhande
-20   res=max(total,res);
-21// now height vala funxtion chalao
-22return 1+max(r1,r2);  // THis for the height function
+16    // basic idea is that we will calculate the max height of both left and right part and we will add it for the resultant diameter
+17    int left=fun1(root->left,res);
+18    int right=fun1(root->right,res);
+19    int total=left+right;
+20    res=max(res,total);
+21    return 1+max(left,right);
+22    
 23}
 24    int diameterOfBinaryTree(TreeNode* root) {
 25        int res=0;
-26        fun1(root,res);
-27        return res;
-28    }
-29};
+26         fun1(root,res);
+27         return res;
+28        
+29    }
+30};
