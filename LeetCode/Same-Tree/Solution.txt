@@ -1,0 +1,31 @@
+1/**
+2 * Definition for a binary tree node.
+3 * struct TreeNode {
+4 *     int val;
+5 *     TreeNode *left;
+6 *     TreeNode *right;
+7 *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+8 *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+9 *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+10 * };
+11 */
+12class Solution {
+13public:
+14bool fun1(TreeNode* p, TreeNode* q){
+15    // first condtion is to check whether root exist or not
+16    if( p == NULL && q == NULL )return true;
+17    // second condtion to whether one exist and another not
+18    if( p == NULL || q == NULL )return false;
+19    // third condition is to check there value
+20    if( p->val != q->val )return false;
+21    // if we somehow passes all these conditon then we have to repeat this work for left and right child also 
+22    bool r1=fun1(p->left,q->left);
+23    bool r2=fun1(p->right,q->right);
+24    // now it's time to return something by making decision
+25    if(r1 == true && r2 ==true)return true;
+26    return false;
+27}
+28    bool isSameTree(TreeNode* p, TreeNode* q) {
+29        return fun1(p,q);
+30    }
+31};
