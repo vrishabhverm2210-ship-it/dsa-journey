@@ -17,16 +17,16 @@
 17        queue<TreeNode*>q;
 18        q.push(root);
 19        while(!q.empty()){
-20            int size=q.size();
-21            vector<int>temp;
-22            while(size--){
-23                TreeNode* node=q.front();
-24                q.pop();
-25                temp.push_back(node->val);
-26                if(node->left !=NULL) q.push(node->left);
-27                if(node->right !=NULL )q.push(node->right);
-28            }
-29            res.push_back(temp);
+20           int size=q.size();
+21           vector<int>temp; // making new copy everytime
+22           while(size--){
+23               TreeNode* node=q.front();
+24               q.pop();
+25               temp.push_back(node->val);
+26               if(node->left !=NULL)q.push(node->left);
+27               if(node->right != NULL)q.push(node->right);
+28           }
+29           res.push_back(temp);
 30        }
 31        return res;
 32    }
