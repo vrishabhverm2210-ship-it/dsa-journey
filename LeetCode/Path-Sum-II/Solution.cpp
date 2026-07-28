@@ -12,32 +12,30 @@
 12class Solution {
 13public:
 14bool isleaf(TreeNode* root){
-15    if(root->left==NULL && root->right ==NULL)return true;
+15    if(root->left==NULL && root->right==NULL)return true;
 16    return false;
 17}
-18void fun1(TreeNode* root, int targetSum,int sum, vector<int> & temp ,  vector<vector<int>>&ans){
-19    // base condition
-20    if(root==NULL)return ;
-21
-22       sum+=root->val;
-23    temp.push_back(root->val);
-24    if(isleaf(root)){
-25        if(targetSum==sum){
-26            ans.push_back(temp);
-27        }
-28          temp.pop_back();  // before returning pop jrur kr do
-29        return;
-30    }
-31      fun1(root->left, targetSum , sum,temp,ans);
-32        fun1(root->right, targetSum , sum,temp,ans);
-33        temp.pop_back();
-34      
-35}
-36    vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
-37        vector<int>temp;
-38        vector<vector<int>>ans;
-39        int sum=0;
-40        fun1(root, targetSum , sum,temp,ans);
-41        return ans;
-42    }
-43};
+18void fun1(TreeNode* root, int targetSum, int sum,vector<vector<int>>&ans, vector<int>&temp){
+19if(root==NULL)return;
+20sum+=root->val;
+21temp.push_back(root->val);
+22
+23 if(isleaf(root)){
+24        if(sum==targetSum){
+25            ans.push_back(temp);
+26        }
+27       
+28    }
+29    fun1(root->left,targetSum,sum,ans,temp);
+30     fun1(root->right,targetSum,sum,ans,temp);
+31     temp.pop_back();
+32}
+33
+34    vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
+35        vector<vector<int>>ans;
+36        vector<int>temp;
+37        int sum=0;
+38        fun1(root,targetSum,sum,ans,temp);
+39        return ans;
+40    }
+41};
