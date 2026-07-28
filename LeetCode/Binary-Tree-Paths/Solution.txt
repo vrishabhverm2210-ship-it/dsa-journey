@@ -1,0 +1,31 @@
+1/**
+2 * Definition for a binary tree node.
+3 * struct TreeNode {
+4 *     int val;
+5 *     TreeNode *left;
+6 *     TreeNode *right;
+7 *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+8 *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+9 *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+10 * };
+11 */
+12class Solution {
+13public:
+14void fun1(TreeNode* root,vector<string>&res ,string  temp){    // pass by value mai copy bnti hai ek orr as it iss , like ek mai changes in hote sirf
+15    if(root==NULL)return;
+16    if (temp.size() > 0)temp+= "->";
+17    temp+=to_string(root->val);    
+18   
+19    if(root->left==NULL && root->right ==NULL){
+20        res.push_back(temp);
+21    }
+22    fun1(root->left,res,temp);
+23    fun1(root->right,res,temp);
+24    }
+25    vector<string> binaryTreePaths(TreeNode* root) {
+26        vector<string> res;
+27        string temp="";
+28        fun1(root,res,temp);
+29        return res;
+30    }
+31};
