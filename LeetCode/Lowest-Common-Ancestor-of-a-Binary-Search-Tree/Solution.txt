@@ -1,0 +1,32 @@
+1/**
+2 * Definition for a binary tree node.
+3 * struct TreeNode {
+4 *     int val;
+5 *     TreeNode *left;
+6 *     TreeNode *right;
+7 *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+8 * };
+9 */
+10
+11class Solution {
+12public:
+13TreeNode* fun1(TreeNode* root, TreeNode* p, TreeNode* q){
+14    // if(root==NULL)return NULL;
+15
+16    // now there are four cases possible
+17    if(root->val==p->val || root->val==q->val)return root;
+18    // 2nd case
+19    if((root->val>p->val&&root->val<q->val) || (root->val<p->val&&root->val>q->val)){
+20        return root;
+21    }
+22    if(root->val>p->val&&root->val>q->val){
+23        // obv we have to search in the left part only
+24       return fun1(root->left,p,q);
+25    }
+26    return fun1(root->right,p,q);
+27    
+28}
+29    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+30        return fun1(root,p,q);
+31    }
+32};
