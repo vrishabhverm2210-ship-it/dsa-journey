@@ -11,21 +11,26 @@
 11 */
 12class Solution {
 13public:
-14  TreeNode* fun1(TreeNode* root, int val){
-15    // base condition
-16    if(root==NULL)return NULL;
+14void fun1(TreeNode* root, int val,TreeNode* & ans){
+15    // base case
+16    if(root==NULL)return;
 17
-18    // three condition bnegi
-19    if(root->val==val){
-20        return root;
-21    }
-22    else if(root->val>val){
-23        return fun1(root->left,val);
-24    }
-25    return fun1(root->right,val);
-26  }
-27
-28    TreeNode* searchBST(TreeNode* root, int val) {
-29        return fun1(root,val);
-30    }
-31};
+18    // normal case
+19    if(root->val==val && ans==NULL){
+20        ans=root;
+21        return;
+22    }
+23    if(root->val>val){
+24        fun1(root->left,val,ans);
+25    }
+26    else{
+27        fun1(root->right,val,ans);
+28    }
+29return ;
+30}
+31    TreeNode* searchBST(TreeNode* root, int val) {
+32        TreeNode* ans=NULL;
+33         fun1(root,val,ans);
+34         return ans;
+35    }
+36};
