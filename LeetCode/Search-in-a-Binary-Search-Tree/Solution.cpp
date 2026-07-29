@@ -16,7 +16,7 @@
 16    if(root==NULL)return;
 17
 18    // normal case
-19    if(root->val==val && ans==NULL){
+19    if(root->val==val ){
 20        ans=root;
 21        return;
 22    }
