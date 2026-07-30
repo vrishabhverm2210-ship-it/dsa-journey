@@ -11,70 +11,57 @@
 11 */
 12class Solution {
 13public:
-14TreeNode* getbig(stack<TreeNode*>& desc) {
-15
-16    TreeNode* big = desc.top();
-17    desc.pop();
-18
-19    TreeNode* curr = big->left;
-20
-21    while (curr) {
-22        desc.push(curr);
-23        curr = curr->right;
-24    }
-25
-26    return big;
-27}
-28TreeNode* getsmall(stack<TreeNode*>& asc) {
-29
-30    TreeNode* small = asc.top();
-31    asc.pop();
-32
-33    TreeNode* curr = small->right;
+14TreeNode* getsmaller(stack<TreeNode*>&asc,TreeNode*root){
+15    TreeNode*  smaller=asc.top();
+16    asc.pop();
+17    TreeNode* righter=smaller->right;
+18    while(righter){
+19        asc.push(righter);
+20        righter=righter->left;
+21    }
+22    return smaller;
+23
+24}
+25TreeNode* getbigger(stack<TreeNode*>&desc,TreeNode*root){
+26    TreeNode*  bigger=desc.top();
+27    desc.pop();
+28    TreeNode* lefter=bigger->left;
+29    while(lefter){
+30        desc.push(lefter);
+31        lefter=lefter->right;
+32    }
+33    return bigger;
 34
-35    while (curr) {
-36        asc.push(curr);
-37        curr = curr->left;
-38    }
-39
-40    return small;
-41}
-42    bool findTarget(TreeNode* root, int k) {
-43        // we are solving this with the second approach
-44        if(root==NULL)return false;
-45        // make to stacks , one to store the asending order and other to store the descending order
-46        stack<TreeNode*>asc;
-47        stack<TreeNode*>desc;
-48        // now push all the lefties node into the asc stack
-49        TreeNode* t=root;
-50        while(t){
-51            asc.push(t);
-52            t=t->left;
-53        }
-54        // now push all the righties node into the desc stack
-55        t=root;
-56         while(t){
-57         desc.push(t);
-58          t=t->right;
-59        } 
-60
-61        // Once you get the least and highest in the stack , then process the basic two pointers apporachh
-62TreeNode* i = getsmall(asc);
-63TreeNode* j = getbig(desc);
-64
-65while(i && j && i != j){
-66
-67    int sum = i->val + j->val;
-68
-69    if(sum == k)
-70        return true;
-71
-72    else if(sum < k)
-73        i = getsmall(asc);
-74
-75    else
-76        j = getbig(desc);
-77}
-78return false;
-79    }
-80};
+35}
+36    bool findTarget(TreeNode* root, int k) {
+37        // firstly build stack for storing the smallest elements
+38        stack<TreeNode*>asc;
+39        TreeNode* temp=root;
+40        while(temp){
+41            asc.push(temp);
+42            temp=temp->left;
+43        }
+44          stack<TreeNode*>desc;
+45          TreeNode* temp2=root;
+46        while(temp2){
+47            desc.push(temp2);
+48            temp2=temp2->right;
+49        }
+50        // now apply 2 sum logic (find the greatest and smallest element)
+51        TreeNode* i=getsmaller(asc,root);
+52        TreeNode* j=getbigger(desc,root);
+53
+54        while(i && j && i!=j){
+55            if(i->val+j->val==k){
+56                return true;
+57            }
+58            else if(i->val+j->val >k){
+59                j=  getbigger(desc,root);
+60            }
+61            else{
+62              i=  getsmaller(asc,root);
+63            }
+64        }
+65        return false;
+66    }
+67};
