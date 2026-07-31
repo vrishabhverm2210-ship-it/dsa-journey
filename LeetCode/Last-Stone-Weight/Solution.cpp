@@ -1,31 +1,30 @@
 1class Solution {
 2public:
-3// struct emp{
-4//     bool operator()(pair<int,char>&a,pair<int,char>&b){
-5//         if(a.first!=b.first){
-6//             return a.first<b.first;
-7//         }
-8//         return a.second<b.second;
-9//     }
-10// };
-11    int lastStoneWeight(vector<int>& stones) {
-12        //   priority_queue<pair<int,char>,vector<pair<int,char>>,emp>pq;
-13        priority_queue<int>pq;
-14        for(int i=0;i<stones.size();i++){
-15            pq.push(stones[i]);   // saare elements heap mai dal gye  tc=>  O(nlogn)
-16        }
-17        while(pq.size()>1){
-18            int t1=pq.top();
-19            pq.pop();
-20            int t2=pq.top();
-21            pq.pop();
-22            int t3=t1-t2;
-23            if(t3==0)continue;
-24            pq.push(t3);
-25            // if(pq.size()==1)return pq.top();
-26            
-27        }
-28      if(pq.empty()) return 0;
-29      return pq.top();
-30    }
-31};
+3    int lastStoneWeight(vector<int>& stones) {
+4        // BUILD THE MAX HEAP FIRST
+5        priority_queue<int>pq;   // max heap syntax
+6
+7        // add all the elements of the stones vector into the heap
+8        for(int i=0;i<stones.size();i++){
+9            pq.push(stones[i]);
+10        }
+11        // now until our heaps doesn't end run a loop
+12        while(!pq.empty()){
+13       if(pq.size()==1){
+14        return pq.top();
+15         break;
+16       }
+17       int stone1=pq.top();
+18       pq.pop();
+19         int stone2=pq.top();
+20       pq.pop();
+21       int diff=stone1-stone2;
+22       if(diff>0){
+23        pq.push(diff);
+24       }
+25
+26        }
+27        return 0;
+28
+29    }
+30};
