@@ -8,13 +8,12 @@
 8      }
 9      // Now check (whether orr elements dalne chahiye ya nahi)
 10      for(int i=k;i<nums.size();i++){// TC=> O(n-k)
-11        // if(nums[i]<=pq.top())continue;
-12          pq.push(nums[i]);
-13        pq.pop();                     // TC=>O(log(k)+log(k)
-14      
-15      }
-16      return pq.top();
-17    }
-18};
-19
-20//space =>O(k)
+11          pq.push(nums[i]);
+12        pq.pop();                     // TC=>O(log(k)+log(k)
+13      
+14      }
+15      return pq.top();
+16    }
+17};
+18
+19//space =>O(k)
