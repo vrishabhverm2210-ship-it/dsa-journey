@@ -23,20 +23,19 @@
 23            string word=i.first;
 24            int freq=i.second;
 25            pair<int,string>curr={freq,word}; // this is how our entry will be stored in pq
-26            if(pq.size()<k){
-27                pq.push(curr);
-28                continue;
+26            pq.push(curr);
+27            if(pq.size()>k){
+28                pq.pop();
 29            }
-30            pq.push(curr);
-31            pq.pop();
-32          }
-33           vector<string> res;
-34           while(!pq.empty()){
-35             pair<int ,string>top=pq.top();
-36             pq.pop();
-37             res.push_back(top.second);
-38           }
-39           reverse(res.begin(),res.end());
-40           return res;
-41    }
-42};
+30        
+31          }
+32           vector<string> res;
+33           while(!pq.empty()){
+34             pair<int ,string>top=pq.top();
+35             pq.pop();
+36             res.push_back(top.second);
+37           }
+38           reverse(res.begin(),res.end());
+39           return res;
+40    }
+41};
