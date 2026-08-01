@@ -1,0 +1,39 @@
+1class Solution {
+2public:
+3    int distance(vector<int>& d){
+4     return d[0]*d[0] + d[1]*d[1];
+5    }
+6   struct emp{
+7    bool operator()(pair<int ,int>&a, pair<int , int>&b){
+8      if(a.first!=b.first){
+9        return a.first<b.first;
+10      }
+11      return a.second<b.second;
+12    }
+13    };
+14    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+15          priority_queue<pair<int ,int >,vector<pair<int, int >>,emp>pq;
+16
+17          for(int i=0;i<points.size();i++){
+18             int  dist=distance(points[i]);
+19               int index=i;
+20          pair<int,int>curr= {dist,index};
+21          if(pq.size()<k){   // if hi lagana remeber
+22          
+23            pq.push(curr);
+24            continue;
+25          }
+26
+27        // According to template (automatic kaam chalega)
+28          pq.push(curr);
+29          pq.pop();
+30          }
+31     // return the answers
+32        vector<vector<int>> res;
+33        while(!pq.empty()){
+34            res.push_back (points[pq.top().second]);
+35            pq.pop();
+36        }
+37        return res;
+38    }
+39};
