@@ -1,0 +1,116 @@
+1class Solution {
+2public:
+3    priority_queue<int> maxi;
+4    priority_queue<int, vector<int>, greater<int>> mini;
+5    unordered_map<int,int> mpp1;
+6
+7    int leftSize = 0;
+8    int rightSize = 0;
+9
+10    void pruneMax() {
+11        while(!maxi.empty() && mpp1[maxi.top()] > 0){
+12            mpp1[maxi.top()]--;
+13            maxi.pop();
+14        }
+15    }
+16
+17    void pruneMin() {
+18        while(!mini.empty() && mpp1[mini.top()] > 0){
+19            mpp1[mini.top()]--;
+20            mini.pop();
+21        }
+22    }
+23
+24    void balanceHeaps(){
+25
+26        // left should have at most one extra valid element
+27        if(leftSize > rightSize + 1){
+28
+29            mini.push(maxi.top());
+30            maxi.pop();
+31
+32            leftSize--;
+33            rightSize++;
+34
+35            pruneMax();
+36        }
+37
+38        else if(leftSize < rightSize){
+39
+40            maxi.push(mini.top());
+41            mini.pop();
+42
+43            leftSize++;
+44            rightSize--;
+45
+46            pruneMin();
+47        }
+48    }
+49
+50    vector<double> medianSlidingWindow(vector<int>& nums, int k) {
+51
+52        vector<double> res;
+53
+54        // build first window
+55        for(int i=0;i<k;i++){
+56
+57            if(maxi.empty() || nums[i] <= maxi.top()){
+58                maxi.push(nums[i]);
+59                leftSize++;
+60            }
+61            else{
+62                mini.push(nums[i]);
+63                rightSize++;
+64            }
+65
+66            balanceHeaps();
+67        }
+68
+69        // first median
+70        if(k&1)
+71            res.push_back(maxi.top());
+72        else
+73            res.push_back(((long long)maxi.top()+mini.top())/2.0);
+74
+75        // sliding starts
+76        for(int i=k;i<nums.size();i++){
+77
+78            int add = nums[i];
+79            int remove = nums[i-k];
+80
+81            // mark stale
+82            mpp1[remove]++;
+83
+84            // remove from valid count
+85            if(remove <= maxi.top())
+86                leftSize--;
+87            else
+88                rightSize--;
+89
+90            // insert new element
+91            if(add <= maxi.top()){
+92                maxi.push(add);
+93                leftSize++;
+94            }
+95            else{
+96                mini.push(add);
+97                rightSize++;
+98            }
+99
+100            // rebalance
+101            balanceHeaps();
+102
+103            // remove stale tops
+104            pruneMax();
+105            pruneMin();
+106
+107            // median
+108            if(k&1)
+109                res.push_back(maxi.top());
+110            else
+111                res.push_back(((long long)maxi.top()+mini.top())/2.0);
+112        }
+113
+114        return res;
+115    }
+116};
