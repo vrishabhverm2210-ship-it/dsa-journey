@@ -11,18 +11,17 @@
 11    int number=0;
 12    if(idx+1<s.size()){
 13        number=(s[idx]-'0')*10 + (s[idx+1]-'0');
-14         if (number>=10 && number<=26){
-15      j2=  fun1(s,idx+2,dp);
-16    }
+14    }
+15    if (number>=10 && number<=26){
+16      j2=  fun1(s,idx+2,dp);
 17    }
-18   
-19    return dp[idx]=j1+j2;
-20   
-21}
-22    int numDecodings(string s) {
-23        // firstly store all the alphabats in the hashmap(no need because we only have to return the ways)
-24        // string number="";
-25        vector<int>dp(s.size(),-1);
-26        return fun1(s,0,dp);
-27    }
-28};
+18    return dp[idx]=j1+j2;
+19   
+20}
+21    int numDecodings(string s) {
+22        // firstly store all the alphabats in the hashmap(no need because we only have to return the ways)
+23        // string number="";
+24        vector<int>dp(s.size(),-1);
+25        return fun1(s,0,dp);
+26    }
+27};
