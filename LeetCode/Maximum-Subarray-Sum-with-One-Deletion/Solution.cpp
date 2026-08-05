@@ -18,7 +18,7 @@
 18            else{
 19                v= prevonedelete+arr[i];
 20            }
-21            onedelete=max(v,prevnodelete);
+21            onedelete=max(v,prevnodelete);  // this means abhi current vala hi krdiya
 22            res=max({res,nodelete,onedelete});
 23        }
 24        return res;
