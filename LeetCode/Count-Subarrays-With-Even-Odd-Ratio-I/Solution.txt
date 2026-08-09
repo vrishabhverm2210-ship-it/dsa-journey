@@ -1,0 +1,19 @@
+1class Solution {
+2public:
+3    int countRatioSubarrays(vector<int>& nums, int a, int b) {
+4        int count=0;
+5         // for subarray if i run two loops 
+6        for(int i=0;i<nums.size();i++){
+7            int even=0;
+8            int odd=0;
+9            for(int j=i;j<nums.size();j++){
+10                if(nums[j]%2==0)even++;
+11                else odd++;
+12                if(odd>0 && ((even*b)-(odd*a) <=0)){
+13                    count++;
+14                }
+15            }
+16        }
+17        return count;
+18    }
+19};
