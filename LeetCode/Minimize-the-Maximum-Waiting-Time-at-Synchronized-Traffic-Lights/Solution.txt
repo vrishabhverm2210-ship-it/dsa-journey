@@ -1,0 +1,28 @@
+1class Solution {
+2public:
+3    int fun1(int light,vector<int>& arrivalTime,int n,int period){
+4int maxitime=INT_MIN;
+5        for(int i=0;i<n;i++){
+6            int r= arrivalTime[i]%period;
+7            int time=0;
+8            if(r<light) time=0;
+9            else{
+10              time=period-r;     
+11            }
+12             maxitime=max(maxitime,time);
+13        }
+14        return maxitime;
+15    }
+16    int minPenalty(int period, vector<int>& lights, vector<int>& arrivalTime) {
+17         // for choosing the maximum waiting time among all cars
+18        int mini=INT_MAX; // FOR RETURNING THE MINIMUM POSSIBLE PENALTY
+19        int n=arrivalTime.size();
+20        int maxigreen=INT_MIN;
+21        for(int i=0;i<lights.size();i++){
+22            maxigreen=max(maxigreen,lights[i]);
+23        }
+24        
+25      return   fun1(maxigreen,arrivalTime,n,period);
+26        
+27    }
+28};
