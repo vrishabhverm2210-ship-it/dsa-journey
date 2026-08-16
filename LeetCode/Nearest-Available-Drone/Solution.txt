@@ -1,0 +1,17 @@
+1class Solution {
+2public:
+3    int nearestDrone(vector<vector<int>>& drones, vector<int>& target) {
+4          int n=drones.size();
+5          int idx=-1;
+6        int temp=INT_MAX;
+7        for(int i=0;i<n;i++){
+8            int dist=abs(drones[i][0]-target[0])+abs(drones[i][1] - target[1]);
+9            if(temp>dist && dist<= drones[i][2]){
+10                idx=i;
+11                temp=dist;
+12            }
+13        
+14        }
+15        return idx;
+16    }
+17};
