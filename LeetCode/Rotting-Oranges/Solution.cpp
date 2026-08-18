@@ -2,51 +2,56 @@
 2public:
 3int x[4]={-1,1,0,0};
 4int y[4]={0,0,-1,1};
-5bool isValid(int row,int col,int n,int m){
-6    if(row<0 ||row>=n || col<0 || col>=m)return false;
-7    return true;
-8}
-9    int orangesRotting(vector<vector<int>>& grid) {
-10        int n=grid.size();
-11        int m=grid[0].size();
-12        int fresh=0;
-13        queue<pair<int,int>>q;
-14        // loop for finding 2 and pushing it into queue
-15        for(int i=0;i<n;i++){
-16            for(int j=0;j<m;j++){
-17             if(grid[i][j]==2){
-18                q.push({i,j});
-19               grid[i][j]=-2;   // for avoiding repetition
-20               }
-21
-22              else if(grid[i][j]==1)fresh++;
-23                //  fresh++;
-24            }    
-25        }
-26        if(fresh<1)return 0;
-27        int time=0;
-28        // now do multisource bfs
-29        while(!q.empty() && fresh>0){
-30            time++;
-31            int s=q.size();
-32            while(s>0){
-33                pair<int,int>top=q.front();
-34                q.pop();
-35                s--;
-36                int i=top.first;
-37                int j=top.second;
-38                for(int k=0;k<4;k++){
-39                    int row=i+x[k];
-40                    int col=j+y[k];
-41                    if(isValid(row,col,n,m) && grid[row][col]==1){
-42                        q.push({row,col});
-43                        grid[row][col]=-2;
-44                        fresh--;
-45                    }
-46                }
-47            }
-48        }
-49        if(fresh>0)return -1;
-50        return time;
-51    }
-52};
+5
+6bool isvalid(int row,int col,int n,int m ){
+7    if(row >=0 && row<n && col >=0 && col<m){
+8        return true;
+9    }
+10    return false;
+11}
+12    int orangesRotting(vector<vector<int>>& grid) {
+13        // make a queue
+14        queue<pair<int,pair<int,int>>>q;
+15        int freshcount=0;
+16        for(int i=0;i<grid.size();i++){
+17            for(int j=0;j<grid[0].size();j++){
+18              if(grid[i][j]==2){
+19                q.push({grid[i][j],{i,j}});
+20                 grid[i][j]=-1;
+21              }
+22              if(grid[i][j]==1){
+23                freshcount++;
+24              }
+25            }
+26        }
+27        // now process in queue
+28        int second=0;
+29                if(freshcount<1)return 0;
+30
+31        while(!q.empty()&& freshcount>0){
+32            int size=q.size();
+33            second++;
+34            while(size--){
+35                pair<int,pair<int,int>>curr=q.front();
+36                q.pop();
+37                int node=curr.first;
+38                int i=curr.second.first;
+39                int j=curr.second.second;
+40               
+41             // push the neighbour
+42            for(int k=0;k<4;k++){
+43                int row=i+x[k];
+44                int col=j+y[k];
+45                if(isvalid(row,col,grid.size(),grid[0].size())  && grid[row][col]==1){
+46                 q.push({grid[row][col],{row,col}});
+47                 freshcount--;
+48                  grid[row][col]=-1;
+49
+50                }
+51            }
+52            }
+53        }
+54        if(freshcount>0)return -1;
+55        return second;
+56    }
+57};
