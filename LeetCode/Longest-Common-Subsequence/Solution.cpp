@@ -19,6 +19,23 @@
 19            vector<int>t(m+1,-1);
 20            dp[i]=t;
 21        }
-22        return fun1(text1,text2,n,m,dp);
-23    }
-24};
+22        // return fun1(text1,text2,n,m,dp);
+23        for(int i=0;i<=n;i++){
+24            dp[i][0]=0;
+25        }
+26        for(int j=0;j<=m;j++){
+27            dp[0][j]=0;
+28        }
+29        for(int i=1;i<=n;i++){
+30            for(int j=1;j<=m;j++){
+31                if(text1[i-1]==text2[j-1]){
+32                    dp[i][j]=1+dp[i-1][j-1];
+33                }
+34                else{
+35                  dp[i][j]=  max(dp[i-1][j] , dp[i][j-1]);
+36                }
+37            }
+38        }
+39return dp[n][m];
+40    }
+41};
