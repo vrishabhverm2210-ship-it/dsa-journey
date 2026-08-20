@@ -1,63 +1,66 @@
 1class Solution {
 2public:
-3    string shortestCommonSupersequence(string text1, string text2) {
-4         // code here
-5          int n=text1.size();
-6          int m=text2.size();  
-7          vector<vector<int>>dp(n+1);
-8        for(int i=0;i<=n;i++){
-9             vector<int>t(m+1,-1);
-10             dp[i]=t;
-11        }
-12        // initialise according to the base case
-13        for(int i=0;i<=n;i++){
-14            dp[i][0]=0;
-15        }
-16        for(int i=0;i<=m;i++){
-17            dp[0][i]=0;
+3    string shortestCommonSupersequence(string str1, string str2) {
+4         
+5       
+6    int n=str1.size();
+7        int m=str2.size();
+8        // make the dp vector
+9        vector<vector<int>>dp(n+1);
+10        for(int i=0;i<=n;i++){
+11            vector<int>t(m+1);
+12            dp[i]=t;
+13        }
+14        
+15        // now intialise the vector 0th row and 0th col , according to the base case
+16        for(int i=0;i<=n;i++){
+17            dp[i][0]=0;
 18        }
-19        // now fill the remaining pllaces of matrix using the normal loops
-20        for(int i=1;i<=n;i++){
-21            for(int j=1;j<=m;j++){
-22                if(text1[i-1]==text2[j-1]){
-23                    dp[i][j]=1+dp[i-1][j-1];
-24                }
-25                else{
-26                    dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+19        for(int i=0;i<=m;i++){
+20            dp[0][i]=0;
+21        }
+22        // now run a nested loop for filling the remaining spots of array
+23        for(int i=1;i<=n;i++){
+24            for(int j=1;j<=m;j++){
+25                if(str1[i-1]==str2[j-1]){
+26                    dp[i][j]=1+dp[i-1][j-1];
 27                }
-28            }
-29        }
-30        // now we have to backtrack the matrix
-31        int i=n;
-32        int j=m;
-33        string s="";
-34        while(i>0 && j>0){
-35          if(text1[i-1]==text2[j-1]){
-36            s.push_back(text1[i-1]);
-37            i--;
-38            j--;
-39          }
-40          else {
-41            if(dp[i-1][j]>dp[i][j-1]){
-42                s.push_back(text1[i-1]);
-43                i--;
-44            }
-45            else{
-46                s.push_back(text2[j-1]);
-47                j--;
-48            }
-49          }
+28                else{
+29                    dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+30                }
+31            }
+32        }
+33      string res="";
+34      int i=n;
+35      int j=m;
+36      while(i>0 && j>0){
+37        if(str1[i-1] == str2[j-1]){
+38            res.push_back(str1[i-1]);
+39            i--;
+40            j--;
+41        }
+42        else {
+43            if(dp[i-1][j]>dp[i][j-1]){
+44            res.push_back(str1[i-1]);
+45            i--;
+46        }
+47        else{
+48            res.push_back(str2[j-1]);
+49            j--;
 50        }
-51        while(i>0){
-52            s.push_back(text1[i-1]);
-53                i--;
-54            
-55        }
-56        while(j>0){
-57  s.push_back(text2[j-1]);
-58                j--;
-59        }
-60        reverse(s.begin(), s.end());
-61        return s;
-62    }
-63};
+51        }
+52      }
+53      while(i>0){
+54        res.push_back(str1[i-1]);
+55        i--;
+56        
+57      }
+58      while(j>0){
+59        res.push_back(str2[j-1]);
+60        j--;
+61     
+62      }
+63        reverse(res.begin(), res.end());
+64      return res;
+65    }
+66};
