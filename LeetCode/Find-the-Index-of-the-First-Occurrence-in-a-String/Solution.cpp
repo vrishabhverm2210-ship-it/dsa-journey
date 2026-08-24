@@ -10,11 +10,14 @@
 10                    if(needle[j]==haystack[idx]){
 11                        idx++;
 12                    }
-13                }
-14                if(abs(i-idx)==needle.size())return i;
-15            }
-16            
-17        }
-18        return -1;
-19    }
-20};
+13                    else{
+14                        break;
+15                    }
+16                }
+17                if(abs(i-idx)==needle.size())return i;
+18            }
+19            
+20        }
+21        return -1;
+22    }
+23};
