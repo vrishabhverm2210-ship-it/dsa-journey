@@ -1,26 +1,20 @@
 1class Solution {
 2public:
 3    vector<int> productExceptSelf(vector<int>& nums) {
-4        int n=nums.size();
-5        vector<int>prefix(n),suffix(n),result(n);
-6
-7        // calculate prefix product first
-8        prefix[0]=1;
-9        for(int i=1;i<n;i++){
-10            prefix[i]=prefix[i-1]*nums[i-1];
-11        }
-12        // now calculate it's suffix part
-13        suffix[n - 1] = 1;
-14         for (int i = n - 2; i >= 0; i--) {
-15           suffix[i] = suffix[i + 1] * nums[i + 1];
-16    } 
+4        //  vector<int> res(nums.size(),-1);
+5         // make the prefix vector
+6         int n=nums.size();
+7         vector<int>res(nums.size(),1);
+8         for(int i=1;i<nums.size();i++){
+9           res[i]=res[i-1]*nums[i-1];
+10         }
+11       int suffix = 1;
+12       for(int i=n-1;i>=0;i--){
+13        res[i]*=suffix;
+14        suffix*=nums[i];
+15        
+16       }
 17
-18   // Now calculate result
-19   for(int i=0;i<n;i++){
-20    result[i]= prefix[i] * suffix[i];
-21   }
-22 
-23 return result;
-24        
-25    }
-26};
+18         return res;
+19    }
+20};
