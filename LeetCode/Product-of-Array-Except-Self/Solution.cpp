@@ -1,26 +1,26 @@
 1class Solution {
 2public:
 3    vector<int> productExceptSelf(vector<int>& nums) {
-4         vector<int> res(nums.size(),-1);
-5         // make the prefix vector
-6         vector<int>prefix(nums.size(),1);
-7         // start from the 1st index
-8         int pro=1;
-9         for(int i=1;i<nums.size();i++){
-10           prefix[i]=prefix[i-1]*nums[i-1];
-11        //    prefix[i]=pro;
-12         }
-13         // similarly for the suffix
-14           vector<int>suffix(nums.size(),1);
-15         pro=1;
-16         for(int i=nums.size()-2;i>=0;i--){
-17           suffix[i]=suffix[i+1]*nums[i+1];
-18        //    suffix[i]=pro;
-19         }
-20         // now all our both the the vectors are created now it's time for the res
-21         for(int i=0;i<nums.size();i++){
-22            res[i]=prefix[i]*suffix[i];
-23         }
-24         return res;
+4        int n=nums.size();
+5        vector<int>prefix(n),suffix(n),result(n);
+6
+7        // calculate prefix product first
+8        prefix[0]=1;
+9        for(int i=1;i<n;i++){
+10            prefix[i]=prefix[i-1]*nums[i-1];
+11        }
+12        // now calculate it's suffix part
+13        suffix[n - 1] = 1;
+14         for (int i = n - 2; i >= 0; i--) {
+15           suffix[i] = suffix[i + 1] * nums[i + 1];
+16    } 
+17
+18   // Now calculate result
+19   for(int i=0;i<n;i++){
+20    result[i]= prefix[i] * suffix[i];
+21   }
+22 
+23 return result;
+24        
 25    }
 26};
