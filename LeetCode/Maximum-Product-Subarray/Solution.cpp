@@ -12,7 +12,7 @@
 12            bestmax=max({choice1,choice2,choice3});
 13            bestmin=min({choice1,choice2,choice3});
 14   
-15            res=max({res,bestmin,bestmax});
+15            res=max(res,bestmax);
 16        }
 17        return res;
 18    }
