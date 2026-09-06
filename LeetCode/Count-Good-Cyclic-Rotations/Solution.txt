@@ -1,0 +1,36 @@
+1class Solution {
+2public:
+3      long long sumb(vector<int>&nums){
+4        long long sum1=0;
+5        for(int i=nums.size()/2;i<nums.size();i++){
+6            sum1+=nums[i];
+7        }
+8        return sum1;
+9    }
+10    long long sum(vector<int>&nums){
+11        long long sum1=0;
+12        for(int i=0;i<nums.size()/2;i++){
+13            sum1+=nums[i];
+14        }
+15        return sum1;
+16    }
+17    int countGoodRotations(vector<int>& nums) {
+18        int n=nums.size();
+19        int len=nums.size();
+20        int count=0;
+21           long long sum1=0;
+22            long long sum2=0;
+23            sum1=sum(nums);
+24            sum2=sumb(nums);
+25        long long diff=sum1-sum2;
+26        for(int i=0;i<len;i++){
+27            // check whether it's good rotation or not
+28            if(diff>0)count++;
+29        // now use mathematics smartly
+30        diff=diff+2LL*nums[(i+len/2)%len]-2LL*nums[i];
+31            // rotataion logic
+32          
+33        }
+34        return count;
+35    }
+36};
