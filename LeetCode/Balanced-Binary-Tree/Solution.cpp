@@ -12,17 +12,16 @@
 12class Solution {
 13public:
 14bool isbalance=true;
-15 int fun1(TreeNode* root){
+15int fun1(TreeNode* root){
 16    if(root==NULL)return 0;
-17    int left=fun1(root->left);
-18    int right=fun1(root->right);
+17    int left=1+fun1(root->left);
+18    int right=1+fun1(root->right);
 19    if(abs(left-right)>1)isbalance=false;
-20    return 1+max(left,right);
+20    return max(left,right);
 21
-22 }
+22}
 23    bool isBalanced(TreeNode* root) {
 24        fun1(root);
-25
-26       return isbalance; 
-27    }
-28};
+25        return isbalance;
+26    }
+27};
