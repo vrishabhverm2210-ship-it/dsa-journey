@@ -1,13 +1,22 @@
 1class Solution {
 2public:
 3    int majorityElement(vector<int>& nums) {
-4        int n= nums.size();
-5        unordered_map<int,int>mpp1;
-6        for(int i=0;i<n;i++)mpp1[nums[i]]++;
-7        for(auto i:mpp1){
-8            if(i.second>n/2)return i.first;
-9
-10        }
-11        return -1;
-12    }
-13};
+4        // let's try to do it via boyre more algo
+5        int n=nums.size();
+6        int count=0;
+7        int candidate=0;
+8        for(int i=0;i<n;i++){
+9            if(count==0){
+10                candidate=nums[i];
+11                count++;
+12            }
+13            else if(candidate==nums[i]){
+14                count++;
+15            }
+16            else{
+17                count--;
+18            }
+19        }
+20        return candidate;
+21    }
+22};
