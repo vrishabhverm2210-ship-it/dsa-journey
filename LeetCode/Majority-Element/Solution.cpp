@@ -9,14 +9,15 @@
 9            if(count==0){
 10                candidate=nums[i];
 11                count++;
-12            }
-13            else if(candidate==nums[i]){
-14                count++;
-15            }
-16            else{
-17                count--;
-18            }
-19        }
-20        return candidate;
-21    }
-22};
+12             
+13            }
+14            else if(candidate==nums[i]){
+15                count++;
+16            }
+17            else{
+18                count--;
+19            }
+20        }
+21        return candidate;
+22    }
+23};
