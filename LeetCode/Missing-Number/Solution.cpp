@@ -3,7 +3,7 @@
 3    int missingNumber(vector<int>& nums) {
 4        unordered_map<int,int>mpp1;
 5        for(int i=0;i<nums.size();i++){
-6            mpp1[nums[i]]++;
+6            mpp1[nums[i]]=1;
 7        }
 8        int n=nums.size();
 9        for(int i=0;i<=n;i++){
