@@ -1,15 +1,15 @@
 1class Solution {
 2public:
 3    vector<int> findDuplicates(vector<int>& nums) {
-4        // if mai hashmap ki constant space bana du
-5        int n=nums.size();
-6        unordered_map<int,int>mpp1;
+4        int n =nums.size();
+5        // use array itself
+6        vector<int>res;
 7        for(int i=0;i<n;i++){
-8            mpp1[nums[i]]++;
-9        }
-10        vector<int>res;
-11        for(auto i:mpp1){
-12            if(i.second==2)res.push_back(i.first);
+8            int j=abs(nums[i])-1;
+9              if(nums[j]<0)res.push_back(abs(nums[i]));
+10             else{
+11                nums[j]*=-1;
+12             }
 13        }
 14        return res;
 15    }
