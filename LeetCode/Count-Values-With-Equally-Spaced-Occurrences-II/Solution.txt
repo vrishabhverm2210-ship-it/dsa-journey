@@ -15,7 +15,7 @@
 15            for(int j=2;j<i.second.size();j++){
 16                if(gap!=i.second[j]-i.second[j-1]){
 17                    flag=true;
-18                    continue;
+18                    break;
 19                }
 20            }
 21            if(!flag){
