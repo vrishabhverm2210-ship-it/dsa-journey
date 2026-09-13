@@ -1,0 +1,27 @@
+1class Solution {
+2public:
+3    int countSpecialIntegers(vector<int>& nums) {
+4         unordered_map<int, vector<int>> mpp1;
+5        int n=nums.size();
+6        for(int i=0;i<n;i++){
+7            mpp1[nums[i]].push_back(i);
+8        }
+9        int count=0;
+10        for(auto i:mpp1){
+11            bool flag=false;
+12            if(i.second.size()<3)continue;
+13
+14            int gap=i.second[1]-i.second[0];
+15            for(int j=2;j<i.second.size();j++){
+16                if(gap!=i.second[j]-i.second[j-1]){
+17                    flag=true;
+18                    continue;
+19                }
+20            }
+21            if(!flag){
+22            count++;
+23        }
+24        }
+25        return count;
+26    }
+27};
