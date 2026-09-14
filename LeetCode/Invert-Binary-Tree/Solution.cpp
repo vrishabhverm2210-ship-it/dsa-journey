@@ -11,15 +11,15 @@
 11 */
 12class Solution {
 13public:
-14 TreeNode* fun1( TreeNode* root){
-15    if(root==NULL)return NULL;
+14void fun1(TreeNode* root){
+15    if(root==NULL)return ;
 16    swap(root->left,root->right);
-17      fun1(root->left);
-18      fun1(root->right);
-19     return root;
+17    fun1(root->left);
+18    fun1(root->right);
+19}
 20
-21 }
-22    TreeNode* invertTree(TreeNode* root) {
-23       return fun1(root);
+21    TreeNode* invertTree(TreeNode* root) {
+22        fun1(root);
+23        return root;
 24    }
 25};
