@@ -1,17 +1,22 @@
 1class Solution {
 2public:
 3    int countPrimes(int n) {
-4       int count=0;
-5       vector<bool>prime(n+1,true);
-6       prime[0]=prime[1]=false;
-7       for(int i=2;i<n;i++){
-8        if(prime[i]){
-9            count++;
-10        }
-11           for(int j=2*i;j<n;j+=i){
-12             prime[j]=0;
-13   }
-14       } 
-15 return count;
-16     }
-17};
+4        int count=1;
+5        vector<bool>res(n,0);  // 0 means all prime
+6if(n <= 2) return 0;
+7       
+8        for(int i=3;1LL*i*i<n; i += 2){       
+9            if(res[i]==0){
+10            for(int j=i*i;j<n;j+=2*i){
+11                res[j]=1;
+12            }
+13        }
+14        }
+15        for(int i=3;i<res.size(); i += 2){
+16            if(res[i]==0){
+17                count++;
+18            }
+19        }
+20        return count;
+21    }
+22};
