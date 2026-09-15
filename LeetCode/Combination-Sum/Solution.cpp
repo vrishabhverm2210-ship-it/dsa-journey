@@ -1,30 +1,27 @@
 1class Solution {
 2public:
-3void fun(vector<int>& cand, int idx,vector<vector<int>>&ans,vector<int>temp,int target,int n,int sum){
-4    // base condition
-5    if( idx==n ){
-6        if(sum==target){
-7        ans.push_back(temp);
+3
+4void fun1(vector<int>& cand, int target,int idx, vector<vector<int>>& res,vector<int>&temp,int currsum){
+5    if(idx==cand.size()){
+6    if(currsum==target){
+7        res.push_back(temp);
 8        }
-9         return;// yeh return miss nhi krna hai 
+9        return ;
 10    }
-11        // choices no. lena hai ya nahi , koi condition toh nahi hai
-12    fun(cand,idx+1,ans,temp,target,n,sum); // lena nahi hai , directly increase the index
-13    if(cand[idx]+sum <= target){
-14    temp.push_back(cand[idx]); 
-15    sum+=cand[idx];
-16    fun(cand,idx,ans,temp,target,n,sum); // idx aage ni krna because dubara bhi le skte hain
-17    temp.pop_back();
-18    sum-=cand[idx];
-19    }
-20
-21    return;
-22
-23}
-24    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-25         vector<vector<int>>ans;
-26         vector<int>temp;
-27         fun(candidates,0,ans,temp,target,candidates.size(),0);
-28         return ans;
-29    }
-30};
+11    fun1(cand,target,idx+1,res,temp,currsum);
+12 if(cand[idx]+currsum <= target){
+13    temp.push_back(cand[idx]); 
+14    currsum+=cand[idx];
+15    fun1(cand,target,idx,res,temp,currsum); // idx aage ni krna because dubara bhi le skte hain
+16    temp.pop_back();
+17    currsum-=cand[idx];
+18    }
+19return;
+20}
+21    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+22         vector<vector<int>> res;
+23         vector<int>temp;
+24         fun1(candidates,target,0,res,temp,0);
+25         return res;
+26    }
+27};
