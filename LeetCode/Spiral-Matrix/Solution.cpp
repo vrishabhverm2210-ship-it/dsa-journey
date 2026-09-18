@@ -1,54 +1,41 @@
-1
-2class Solution {
-3public:
-4    vector<int> spiralOrder(vector<vector<int> >& matrix) {
-5        
-6        
-7        vector<int> ans;
-8        int row = matrix.size();
-9        int col = matrix[0].size();
-10        
-11        int count = 0;
-12        int total = row*col;
-13        
-14        //index initialisation
-15        int startingRow = 0;
-16        int startingCol = 0;
-17        int endingRow = row-1;
-18        int endingCol = col-1;
-19        
-20        
-21        while(count < total) {
-22            
-23            //print starting row
-24            for(int index = startingCol; count < total && index<=endingCol; index++) {
-25                ans.push_back(matrix[startingRow][index]);
-26                count++;
-27            }
-28            startingRow++;
-29            
-30            //print ending column
-31            for(int index = startingRow; count < total && index<=endingRow; index++) {
-32                ans.push_back(matrix[index][endingCol]);
-33                count++;
-34            }
-35            endingCol--;
-36            
-37            //print ending row
-38            for(int index = endingCol; count < total && index>=startingCol; index--) {
-39                ans.push_back(matrix[endingRow][index]);
-40                count++;
-41            }
-42            endingRow--;
-43            
-44            //print starting column
-45            for(int index = endingRow; count < total && index>=startingRow; index--) {
-46                ans.push_back(matrix[index][startingCol]);
-47                count++;
-48            }
-49            startingCol++;
-50        } 
-51        return ans;
-52    }
-53};
-54   
+1class Solution {
+2public:
+3    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+4         vector<int>res;
+5         int n=matrix.size();
+6         int m=matrix[0].size();
+7         int startrow=0;
+8         int endrow=n-1;
+9         int startcol=0;
+10         int endcol=m-1;
+11        int total=n*m;
+12        int count=0;
+13         while(count < total){
+14        // print the starting row
+15        for(int i=startcol;i<=endcol && count<total;i++){
+16            res.push_back(matrix[startrow][i]);
+17            count++;
+18        }
+19        startrow++;
+20        // print last col
+21        for(int i=startrow;i<=endrow && count<total ;i++){
+22            res.push_back(matrix[i][endcol]);
+23            count++;
+24        }
+25        endcol--;
+26        // print end row
+27        for(int i=endcol;count<total && i>=startcol;i--){
+28         res.push_back(matrix[endrow][i]);
+29         count++;
+30        }
+31        endrow--;
+32        // print startcol
+33        for(int i=endrow;count<total && i>=startrow;i--){
+34            res.push_back(matrix[i][startcol]);
+35            count++;
+36        }
+37        startcol++;
+38    }
+39    return res;
+40    }
+41};
