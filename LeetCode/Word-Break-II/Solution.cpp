@@ -19,10 +19,10 @@
 19                fun1(s, set, j + 1, temp, res);
 20
 21                // backtrack
-22                temp.erase(temp.size() - word.size());
+22                temp.erase(temp.size() - word.size());       // Delete everything from (jo number ayega subtract krke) to the end.
 23                
 24                // remove the space before word if it was added
-25                if(!temp.empty() && temp.back() == ' ')
+25                if(!temp.empty() && temp.back() == ' ')// back() gives you the last character of the string.
 26                    temp.pop_back();
 27            }
 28
