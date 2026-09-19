@@ -27,7 +27,7 @@
 27            // explore the whole string
 28           for(int i=0;i<s.size();i++){
 29             char ch=s[i];
-30             for(int j=97;j<123;j++){
+30             for(int j='a'; j<= 'z'; j++){
 31                if(ch==j)continue;
 32                s[i]=j;   
 33                if(mpp1.find(s)!=mpp1.end()){
