@@ -12,39 +12,33 @@
 12class Solution {
 13public:
 14    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-15         if (root == NULL)
-16    return {};
-17         vector<vector<int>> res;
-18         queue<TreeNode*>q;
-19         q.push(root);
-20         int lefttoright=1;
-21         while(!q.empty()){
-22            int size=q.size();
-23            vector<int>temp(size,0);
-24            int start=0;
-25            int end=size-1;
-26            
-27            while(size--){
-28                TreeNode* node=q.front();
-29                q.pop();
-30                if(lefttoright==1){
-31                    temp[start]=node->val;
-32                    start++;
-33                }
-34                else {
-35                    temp[end]=node->val;
-36                    end--;
-37                }
-38
-39                // now push the left child and the right child
-40                if(node->left!=NULL)q.push(node->left);
-41                if(node->right!=NULL)q.push(node->right);
-42
-43            }
-44            lefttoright=1-lefttoright;
-45            res.push_back(temp);
-46                     }
-47                     return res;
-48         
-49    }
-50};
+15        if(root==NULL)return {};
+16          vector<vector<int>> res;
+17          queue< TreeNode*>q;
+18          q.push(root);
+19       bool lefttoright=1;
+20          while(!q.empty()){
+21              int size=q.size();
+22               vector<int>temp(size,-1);
+23                int start=0;
+24                int end=size-1;
+25          while(size--){
+26           TreeNode* node=q.front();
+27            q.pop();
+28               if(lefttoright){
+29                    temp[start]=node->val;
+30                    start++;
+31                }
+32                else{
+33                    temp[end]=node->val;
+34                    end--;
+35                }
+36               if(node->left!=NULL)q.push(node->left);
+37            if(node->right!=NULL)q.push(node->right);
+38            }
+39            lefttoright=1-lefttoright;
+40          res.push_back(temp);
+41          }
+42          return res;
+43    }
+44};
