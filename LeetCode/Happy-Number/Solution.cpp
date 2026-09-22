@@ -16,7 +16,7 @@
 16        while(fast!=1){
 17          slow=fun1(slow);
 18          fast=fun1(fun1(fast));
-19          if ( slow!=1 && slow == fast){
+19          if ( slow!=1&&slow == fast){
 20            return false;
 21          }
 22        }
