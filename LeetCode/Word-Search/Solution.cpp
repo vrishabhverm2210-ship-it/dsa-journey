@@ -31,8 +31,8 @@
 31
 32                dfs(board, word, idx + 1, row, col);
 33
-34                if (isfound)
-35                    return;
+34                // if (isfound)
+35                //     return;
 36            }
 37        }
 38
