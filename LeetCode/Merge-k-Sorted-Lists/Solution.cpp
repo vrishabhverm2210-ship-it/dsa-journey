@@ -11,35 +11,36 @@
 11class Solution {
 12public:
 13struct emp{
-14    bool operator()(ListNode* &a , ListNode* &b){
-15        return a->val>b->val;
+14    bool operator()( ListNode* &a,  ListNode* &b){
+15      return a->val>b->val;
 16    }
 17};
 18    ListNode* mergeKLists(vector<ListNode*>& lists) {
-19        priority_queue<ListNode*,vector<ListNode*>,emp>pq;
-20
-21        for(int i=0;i<lists.size();i++){
-22                if(lists[i] != NULL) {
-23
+19        // make a min heap
+20        priority_queue<ListNode*,vector<ListNode*>,emp>pq;
+21
+22        for(int i=0;i<lists.size();i++){
+23           if(lists[i] != nullptr) {
 24            pq.push(lists[i]);
-25                }
+25        }
 26        }
-27ListNode* head=NULL;
-28ListNode* tail=NULL;
-29    while(!pq.empty()){
-30        ListNode* node=pq.top();
-31        pq.pop();
-32        if(node->next!=NULL)pq.push(node->next);
-33        if(head==NULL){
-34            head=node;
-35            tail=node;
-36        }
-37        else{
-38            tail->next=node;
-39            tail=tail->next;
-40        }
-41
+27 ListNode*head=NULL;
+28  ListNode* tail=NULL;
+29
+30  while(!pq.empty()){
+31    ListNode* node=pq.top();
+32    pq.pop();
+33    if(node->next!=NULL)pq.push(node->next);
+34    if(head==NULL){
+35
+36        head=node;
+37        tail=node;
+38    }
+39    else{
+40        tail->next=node;
+41         tail=tail->next;
 42    }
-43return head;
-44    }
-45};
+43  }
+44        return head;
+45    }
+46};
