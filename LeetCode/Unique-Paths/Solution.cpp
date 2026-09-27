@@ -13,6 +13,20 @@
 13            vector<int>t(m+1,-1);
 14            dp[i]=t;
 15         }
-16        return fun1(0,0,n,m,dp);
-17    }
-18};
+16        // return fun1(0,0,n,m,dp);
+17
+18        // base case
+19        for(int i=0;i<m;i++){
+20            dp[n-1][i]=1;
+21        }
+22        for(int i=0;i<n;i++){
+23            dp[i][m-1]=1;
+24        }
+25        for(int i=n-2;i>=0;i--){
+26            for(int j=m-2;j>=0;j--){
+27                dp[i][j]=dp[i+1][j]+dp[i][j+1];
+28            }
+29        }
+30return dp[0][0];
+31    }
+32};
