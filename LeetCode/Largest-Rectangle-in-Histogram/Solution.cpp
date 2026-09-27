@@ -1,6 +1,6 @@
 1class Solution {
-2private:
-3    vector<int> nextSmallerElement(vector<int> arr, int n) {
+2public:
+3 vector<int> nextSmallerElement(vector<int> arr, int n) {
 4        stack<int> s;
 5        s.push(-1);
 6        vector<int> ans(n);
@@ -35,28 +35,27 @@
 35        }
 36        return ans; 
 37    }
-38    
-39public:
-40    int largestRectangleArea(vector<int>& heights) {
-41        int n= heights.size();
-42        
-43        vector<int> next(n);
-44        next = nextSmallerElement(heights, n);
-45            
-46        vector<int> prev(n);
-47        prev = prevSmallerElement(heights, n);
-48        
-49        int area = INT_MIN;
-50        for(int i=0; i<n; i++) {
-51            int l = heights[i];
-52            
-53            if(next[i] == -1) {
-54                next[i] = n;
-55            }
-56             int b = next[i] - prev[i] - 1;
-57            int newArea = l*b;
-58            area = max(area, newArea);
-59        }
-60        return area;
-61    }
-62};
+38    int largestRectangleArea(vector<int>& heights) {
+39         int n= heights.size();
+40        
+41        vector<int> next(n);
+42        next = nextSmallerElement(heights, n);
+43            
+44        vector<int> prev(n);
+45        prev = prevSmallerElement(heights, n);
+46        
+47        int area = INT_MIN;
+48        for(int i=0; i<n; i++) {
+49            int l = heights[i];
+50            
+51            if(next[i] == -1) {
+52                next[i] = n;
+53            }
+54             int b = next[i] - prev[i] - 1;
+55            int newArea = l*b;
+56            area = max(area, newArea);
+57        }
+58        return area;
+59
+60    }
+61};
