@@ -11,33 +11,27 @@
 11 */
 12class Solution {
 13public:
-14
-15 void fun1(TreeNode* root, long long targetSum,int &count){
-16    if(root==NULL)return ;
-17    
-18
-19        if(targetSum==root->val){
-20            count+=1;
-21        }
-22        fun1(root->left,targetSum-root->val,count);
-23      fun1(root->right,targetSum-root->val,count);
-24        
-25
-26    }
-27
-28    int pathSum(TreeNode* root, int targetSum) {
-29        if(root==NULL)return 0;
-30        int count=0;
-31        int res=0;
-32         fun1(root,targetSum,count);
-33         
-34    
-35       count+=pathSum(root->left,targetSum);
-36           
-37      
-38      count+=pathSum(root->right,targetSum);
-39            
-40return count;
-41
-42    }
-43};
+14void fun1(TreeNode* root, long long targetSum,long long &sum,int &count){
+15    if(root==NULL)return ;
+16    sum+=root->val;
+17    if(sum==targetSum) count+=1;
+18    
+19    fun1(root->left,targetSum,sum,count);
+20    fun1(root->right,targetSum,sum,count);
+21     sum-=root->val;
+22
+23}
+24    int pathSum(TreeNode* root, int targetSum) {
+25        if(root==NULL)return 0 ;
+26
+27      int count=0;
+28        long long sum=0;
+29        fun1(root,targetSum,sum,count);
+30
+31       count+=pathSum(root->left,targetSum);
+32       count+=pathSum(root->right,targetSum);
+33       return count;
+34
+35
+36    }
+37};
