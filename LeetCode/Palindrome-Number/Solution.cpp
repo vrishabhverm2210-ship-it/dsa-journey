@@ -1,7 +1,7 @@
 1class Solution {
 2public:
 3    bool isPalindrome(int x) {
-4        if(x<0)return false;
+4        // if(x<0)return false;
 5        int temp=x;
 6        long long rev=0;
 7        while(temp>0){
