@@ -9,24 +9,26 @@
 9 */
 10class Solution {
 11public:
-12int fun1(TreeNode* root, TreeNode* p, TreeNode* q ,TreeNode* & ans){
-13    if(root==NULL)return 0;
-14
-15    int r1=fun1(root->left,p,q,ans);
-16    int r2=fun1(root->right,p,q,ans);   
-17    int self=0;
-18    if(p->val==root->val || q->val == root->val){
-19        self=1;
-20    }
-21    int total=r1+r2+self;
-22    if(total==2 && ans==NULL){
-23        ans=root;
-24    }
-25    return total;
-26}
-27    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-28        TreeNode*  ans=NULL;
-29        fun1(root,p,q,ans);
-30        return ans;
-31    }
-32};
+12TreeNode*ans =NULL;
+13int fun1(TreeNode* root, TreeNode* p, TreeNode* q){
+14    if(root==NULL)return 0;
+15
+16    int left=fun1(root->left,p,q);
+17    
+18    int right=fun1(root->right,p,q);
+19    int self=0;
+20    if(root->val==p->val   || root->val==q->val ){
+21        self=1;
+22    }
+23    int total=left+right+self;
+24
+25    if(total==2 && ans==NULL)ans=root;
+26    return left+right+self;
+27
+28}
+29    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+30        
+31        fun1(root,p,q);
+32        return ans;
+33    }
+34};
