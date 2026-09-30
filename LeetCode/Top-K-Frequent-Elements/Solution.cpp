@@ -1,30 +1,26 @@
 1class Solution {
 2public:
 3    vector<int> topKFrequent(vector<int>& nums, int k) {
-4        unordered_map<int,int>mpp1;  // to store the element of array and their frequency
-5        for(int i=0;i<nums.size();i++){
-6            mpp1[nums[i]]++;
-7        }
-8        // now construct the min heap
-9        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
-10        for(auto i:mpp1){
-11            int el=i.first;
-12            int freq=i.second;
+4        vector<int> res;
+5        int n=nums.size();
+6        unordered_map<int,int>mpp1;
+7        for(int i=0;i<n;i++){
+8            mpp1[nums[i]]++;
+9        }
+10        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+11
+12        for(auto i:mpp1){
 13            if(pq.size()<k){
-14          pq.push({freq,el});
-15          continue;
+14               pq.push({i.second,i.first});
+15               continue;
 16            }
-17            pq.push({freq,el});
+17            pq.push({i.second,i.first});
 18            pq.pop();
 19        }
-20vector<int>res;
-21while(!pq.empty()){
-22    pair<int,int>curr=pq.top();
-23    pq.pop();
-24    res.push_back(curr.second);
-25
-26}
-27reverse(res.begin(),res.end());
-28return res;
-29    }
-30};
+20        while(!pq.empty()){
+21            res.push_back(pq.top().second);
+22            pq.pop();
+23        }
+24        return res;
+25    }
+26};
