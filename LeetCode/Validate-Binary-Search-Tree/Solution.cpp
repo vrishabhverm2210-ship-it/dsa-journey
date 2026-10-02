@@ -12,21 +12,21 @@
 12class Solution {
 13public:
 14bool isvalid=true;
-15void fun1(TreeNode* root, TreeNode* &prev){
-16    // base condition
-17    if(root==NULL)return;
-18    fun1(root->left,prev);
-19    // now our main logic
-20    if(prev==NULL){
-21        prev=root;
-22    }
-23    else{
-24        if(prev->val >= root->val){
-25            isvalid=false;
-26        }
-27        prev=root;
-28    }
-29    fun1(root->right,prev);
+15void fun1(TreeNode* root,TreeNode* &prev){
+16    if(root==NULL)return ;
+17    fun1(root->left,prev);
+18    if(prev==NULL)prev=root;
+19    else {
+20        if(prev->val>=root->val){
+21     isvalid=false;
+22
+23    }
+24    prev=root;
+25    }
+26
+27
+28    fun1(root->right,prev);
+29    return ;
 30}
 31    bool isValidBST(TreeNode* root) {
 32        TreeNode* prev=NULL;
