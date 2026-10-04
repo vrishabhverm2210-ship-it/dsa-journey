@@ -1,25 +1,22 @@
 1class Solution {
 2public:
 3    int maxArea(vector<int>& height) {
-4        int i=0;
-5        int j=height.size()-1;
-6        int maxi=INT_MIN;
-7        while(i<j){
-8            int len=j-i;
-9            int breadth=min(height[i],height[j]);
-10            int area=len*breadth;
-11            maxi=max(maxi,area);
-12            if(height[i]>height[j]){
-13                j--;
-14            }
-15            else if(height[i]<height[j]){
+4        int n=height.size();
+5        int i=0;
+6        int j=n-1;
+7        int res=INT_MIN;
+8        while(i<j){
+9            int len=min(height[i],height[j]);
+10            int breath=j-i;
+11            int area=len*breath;
+12            res=max(res,area);
+13            if(height[i]>height[j])j--;
+14            else if(height[i]<height[j])i++;
+15            else{
 16                i++;
-17            }
-18            else{
-19                i++;
-20                j--;
-21            }
-22        }
-23        return maxi;
-24    }
-25};
+17                j--;
+18            }
+19        }
+20        return res;
+21    }
+22};
