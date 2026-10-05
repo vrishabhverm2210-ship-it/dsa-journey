@@ -7,7 +7,7 @@
 7            mpp1[nums[i]]++;
 8        }
 9
-10        for(int i=1;i<INT_MAX-1;i++ ){
+10        for(int i=1;i<=n+1;i++ ){
 11            if(mpp1.find(i)==mpp1.end()){
 12                return i;
 13            }
