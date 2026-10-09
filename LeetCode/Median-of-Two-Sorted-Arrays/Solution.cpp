@@ -32,7 +32,7 @@
 32
 33        int len=n1+n2;
 34      if (len % 2 == 0) {
-35    return ((long long)res[len/2 - 1] + res[len/2]) / 2.0;
+35    return (res[len/2 - 1] + res[len/2]) / 2.0;
 36}
 37
 38return res[len/2];
