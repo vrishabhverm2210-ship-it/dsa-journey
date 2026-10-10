@@ -9,36 +9,35 @@
 9    int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
 10        int n=grid.size();
 11        int m=grid[0].size();
-12        queue<pair<int,int>>q;
-13              // Start or destination blocked
-14        if (grid[0][0] == 1 || grid[n-1][n-1] == 1)
-15            return -1;
-16
-17        q.push({0,0});
-18        grid[0][0]=1;
-19        int distance=1;
-20           while (!q.empty()) {
-21            int size = q.size();
-22
-23            while (size--) {
-24                pair<int,int>curr=q.front();
-25                q.pop();
-26                int i=curr.first;
-27                int j=curr.second;
-28                  if (i == n-1 && j == n-1)
-29                    return distance;
-30                for(int k=0;k<8;k++){
-31                    int row=i+x[k];
-32                    int col=j+y[k];
-33                    
-34                    if(isValid(row,col,n) && grid[row][col]==0){
-35                            grid[row][col] = 1; // mark visited
-36                        q.push({row, col});
-37                    }
-38                }
-39            }
-40            distance++;
-41           }
-42return -1;
-43    }
-44};
+12        if(grid[0][0]==1)return -1;
+13        if(grid[n-1][m-1]==1)return -1;
+14
+15        queue<pair<int,int>>q;
+16        q.push({0,0});
+17        grid[0][0]=1;
+18        int dist=1;
+19        while(!q.empty()){
+20            int size=q.size();
+21            while(size--){
+22                pair<int,int>curr=q.front();
+23                q.pop();
+24                int i=curr.first;
+25                int j=curr.second;
+26                if(i==n-1&&j==m-1)return dist;
+27                  for(int k=0;k<8;k++){
+28                    int row=i+x[k];
+29                    int col=j+y[k];
+30                    
+31                    if(isValid(row,col,n) && grid[row][col]==0){
+32                            grid[row][col] = 1; // mark visited
+33                        q.push({row, col});
+34                    }
+35                }
+36
+37            
+38            }
+39            dist++;
+40        }
+41return -1;
+42    }
+43};
