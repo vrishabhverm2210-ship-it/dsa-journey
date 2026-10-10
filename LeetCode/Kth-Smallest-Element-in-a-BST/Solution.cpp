@@ -11,21 +11,28 @@
 11 */
 12class Solution {
 13public:
-14void inorder(TreeNode* root,TreeNode* &prev, int& k ,int & count){
-15    if(root==NULL)return;
-16   
-17    inorder(root->left,prev,k,count);
-18     count++;
-19      if(count==k){
-20        prev=root;
-21    return;
-22    }
-23    inorder(root->right,prev,k,count);
-24}
-25    int kthSmallest(TreeNode* root, int k) {
-26     TreeNode* prev=NULL;
-27     int count=0;
-28        inorder(root,prev,k,count);
-29        return prev->val;
-30    }
-31};
+14TreeNode* getsmall( stack<TreeNode* >&asc){
+15    TreeNode * small=asc.top();
+16    asc.pop();
+17    TreeNode* curr=small->right;
+18    while(curr){
+19        asc.push(curr);
+20        curr=curr->left;
+21    }
+22    return small;
+23}
+24    int kthSmallest(TreeNode* root, int k) {
+25        stack<TreeNode* >asc;
+26        int ans;
+27        TreeNode* t=root;
+28        while(t){
+29            asc.push(t);
+30            t=t->left;
+31        }
+32        while(k--){
+33            TreeNode* node=getsmall(asc);
+34            ans=node->val;
+35        }
+36        return ans;
+37    }
+38};
