@@ -11,25 +11,24 @@
 class Solution {
 public:
     ListNode* rotateRight(ListNode* head, int k) {
+        int count=1;
         if(head==NULL)return NULL;
-          int count=1;
-            ListNode * last=head;
-            while(last->next!=NULL){
-                count++;
-                last=last->next;
-            }
-            k=k%count;
-            if(k==0)return head; // no need of rotation
-            // LET'S CALCULATE (COUNT-K)TH TERM
-            int times=count-k-1; 
-              ListNode * node=head;
-            while(times--){
-               node=node->next;
-            }
-            // now do connections
-            last->next=head;
-              ListNode *newhead=node->next;
-              node->next=NULL;
-              return newhead;
+         ListNode* temp=head;
+         while(temp->next!=NULL){
+            temp=temp->next;
+            count++;
+         }
+         int rotate=k%count;
+         if(rotate==0)return head;
+         int times=count - rotate-1;
+          ListNode* curr=head;
+         while(times--){
+          curr=curr->next;
+         }
+ ListNode* next1=curr->next;
+         temp->next=head;
+         curr->next=NULL;
+         return next1;
+         
     }
 };
