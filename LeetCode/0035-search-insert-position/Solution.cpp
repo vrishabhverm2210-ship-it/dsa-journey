@@ -1,24 +1,24 @@
 class Solution {
 public:
-    int searchInsert(vector<int>& arr, int tar) {
-         int n = arr.size();
-        int start = 0;
-        int end = n - 1;
-        int ans = -1;
-        while (start <= end) {
-            int mid = start + (end - start) / 2;
-            if (arr[mid] == tar) {
+    int searchInsert(vector<int>& nums, int target) {
+        int n=nums.size();
+        int low=0;
+        int high=n-1;
+        int res=-1;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            if(nums[mid]==target){
                 return mid;
-            } else if (arr[mid] > tar) {
-                ans = mid;
-                end = mid - 1;
-            } else {
-                start = mid + 1;
             }
-
+            else if(nums[mid]>target){
+                 res=mid;
+                 high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
         }
-        if (ans == -1)
-            return n;
-        return ans;
+        if(res==-1)return n;
+        return res;
     }
 };
