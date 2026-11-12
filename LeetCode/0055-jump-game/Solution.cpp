@@ -1,16 +1,17 @@
 class Solution {
 public:
+bool fun1(vector<int>&nums,int idx,vector<int>&dp){
+    if(idx==nums.size()-1)return true;
+    if(idx>=nums.size())return false;
+if(dp[idx]!=-1)return dp[idx];
+    for(int i=idx+1;i<=idx+nums[idx];i++){
+          if(fun1(nums,i,dp))return dp[idx]=true;
+    }
+    return dp[idx]=false;
+}
     bool canJump(vector<int>& nums) {
-        int reach = 0;
-        int n = nums.size();
-        for (int i = 0; i < n; i++) {
-            if (reach == n - 1) {
-                return true;
-            } else if (reach < i) {
-                return false;
-            }
-            reach = max(reach, i + nums[i]);
-        }
-        return true ;
+        int n=nums.size();
+        vector<int>dp(n+1,-1);
+        return fun1(nums,0,dp);
     }
 };
