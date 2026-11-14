@@ -1,6 +1,6 @@
 class Solution {
 public:
-vector<int> nextSmallerElement(vector<int> arr, int n) {
+vector<int> nextSmaller(vector<int> arr, int n) {
     stack<int>st;
     st.push(-1);
     vector<int>ans(n);
@@ -14,7 +14,7 @@ vector<int> nextSmallerElement(vector<int> arr, int n) {
  }
  return ans;
 }
-vector<int> prevSmallerElement(vector<int> arr, int n){
+vector<int> prevSmaller(vector<int> arr, int n){
    stack<int>st;
     st.push(-1);
     vector<int>ans(n);
@@ -28,27 +28,24 @@ vector<int> prevSmallerElement(vector<int> arr, int n){
  }
  return ans;
 }
-
     int largestRectangleArea(vector<int>& heights) {
-        int n= heights.size();
-        
-        vector<int> next(n);
-        next = nextSmallerElement(heights, n);
-            
-        vector<int> prev(n);
-        prev = prevSmallerElement(heights, n);
-        
-        int ans = INT_MIN;
-        for(int i=0;i<n;i++){
-            int len=heights[i];
+        int n=heights.size();
 
- if(next[i] == -1) {
-                next[i] = n;
-            }
-            int breadth=next[i]-prev[i]-1;
-            int area=len*breadth;
-            ans=max(ans,area);
-            
+        vector<int>next(n);
+        next=nextSmaller(heights,n);
+
+        vector<int>prev(n);
+        prev=prevSmaller(heights,n);
+
+        int ans=INT_MIN;
+
+        for(int i=0;i<n;i++){
+
+            int len=heights[i];
+           
+    if(next[i]==-1)next[i]=n;
+     int breadth=next[i] - prev[i] -1;
+            ans=max(ans,len * breadth);
         }
         return ans;
     }
