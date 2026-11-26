@@ -37,7 +37,7 @@ public:
 
         }
     for (auto &i : nodes) {
-    vector<int> colVals;
+    vector<int> colVals;    // because we have to return seperate vector for every col
     for (auto &j : i.second) {
         // sort krna jruri haiiiiiiiiiiiii
         auto &vals = j.second;
